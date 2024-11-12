@@ -1,0 +1,17 @@
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Web.ViewModels\bin\Debug\net8.0\TastyOrders.Web.ViewModels.deps.json
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Web.ViewModels\bin\Debug\net8.0\TastyOrders.Web.ViewModels.dll
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Web.ViewModels\bin\Debug\net8.0\TastyOrders.Web.ViewModels.pdb
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Web.ViewModels\obj\Debug\net8.0\TastyOrders.Web.ViewModels.GeneratedMSBuildEditorConfig.editorconfig
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Web.ViewModels\obj\Debug\net8.0\TastyOrders.Web.ViewModels.AssemblyInfoInputs.cache
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Web.ViewModels\obj\Debug\net8.0\TastyOrders.Web.ViewModels.AssemblyInfo.cs
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Web.ViewModels\obj\Debug\net8.0\TastyOrders.Web.ViewModels.csproj.CoreCompileInputs.cache
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Web.ViewModels\obj\Debug\net8.0\TastyOrders.Web.ViewModels.dll
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Web.ViewModels\obj\Debug\net8.0\refint\TastyOrders.Web.ViewModels.dll
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Web.ViewModels\obj\Debug\net8.0\TastyOrders.Web.ViewModels.pdb
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Web.ViewModels\obj\Debug\net8.0\ref\TastyOrders.Web.ViewModels.dll
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Web.ViewModels\bin\Debug\net8.0\TastyOrders.Common.dll
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Web.ViewModels\bin\Debug\net8.0\TastyOrders.Data.Models.dll
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Web.ViewModels\bin\Debug\net8.0\TastyOrders.Common.pdb
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Web.ViewModels\bin\Debug\net8.0\TastyOrders.Data.Models.pdb
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Web.ViewModels\obj\Debug\net8.0\TastyOrders.Web.ViewModels.csproj.AssemblyReference.cache
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Web.ViewModels\obj\Debug\net8.0\TastyOrd.F0C3D63D.Up2Date

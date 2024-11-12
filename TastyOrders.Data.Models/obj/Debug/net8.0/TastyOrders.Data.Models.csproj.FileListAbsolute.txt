@@ -1,0 +1,12 @@
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Data.Models\bin\Debug\net8.0\TastyOrders.Data.Models.deps.json
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Data.Models\bin\Debug\net8.0\TastyOrders.Data.Models.dll
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Data.Models\bin\Debug\net8.0\TastyOrders.Data.Models.pdb
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Data.Models\obj\Debug\net8.0\TastyOrders.Data.Models.GeneratedMSBuildEditorConfig.editorconfig
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Data.Models\obj\Debug\net8.0\TastyOrders.Data.Models.AssemblyInfoInputs.cache
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Data.Models\obj\Debug\net8.0\TastyOrders.Data.Models.AssemblyInfo.cs
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Data.Models\obj\Debug\net8.0\TastyOrders.Data.Models.csproj.CoreCompileInputs.cache
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Data.Models\obj\Debug\net8.0\TastyOrders.Data.Models.dll
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Data.Models\obj\Debug\net8.0\refint\TastyOrders.Data.Models.dll
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Data.Models\obj\Debug\net8.0\TastyOrders.Data.Models.pdb
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Data.Models\obj\Debug\net8.0\ref\TastyOrders.Data.Models.dll
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Data.Models\obj\Debug\net8.0\TastyOrders.Data.Models.csproj.AssemblyReference.cache

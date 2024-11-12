@@ -1,0 +1,11 @@
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Common\bin\Debug\net8.0\TastyOrders.Common.deps.json
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Common\bin\Debug\net8.0\TastyOrders.Common.dll
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Common\bin\Debug\net8.0\TastyOrders.Common.pdb
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Common\obj\Debug\net8.0\TastyOrders.Common.GeneratedMSBuildEditorConfig.editorconfig
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Common\obj\Debug\net8.0\TastyOrders.Common.AssemblyInfoInputs.cache
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Common\obj\Debug\net8.0\TastyOrders.Common.AssemblyInfo.cs
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Common\obj\Debug\net8.0\TastyOrders.Common.csproj.CoreCompileInputs.cache
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Common\obj\Debug\net8.0\TastyOrders.Common.dll
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Common\obj\Debug\net8.0\refint\TastyOrders.Common.dll
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Common\obj\Debug\net8.0\TastyOrders.Common.pdb
+D:\Back Up\softuni\C# WEB\Advanced\TastyOrders\TastyOrders\TastyOrders.Common\obj\Debug\net8.0\ref\TastyOrders.Common.dll
