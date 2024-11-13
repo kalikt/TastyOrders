@@ -25,5 +25,20 @@ namespace TastyOrders.Common
             public const int ImageUrlMinLength = 8;
             public const int ImageUrlMaxLength = 2083;
         }
+
+        public static class Restaurant
+        {
+            public const int NameMinLength = 3;
+            public const int NameMaxLength = 40;
+            public const int LocationMinLength = 3;
+            public const int LocationMaxLength = 30;
+            public const int ImageUrlMinLength = 8;
+            public const int ImageUrlMaxLength = 2083;
+        }
+
+        public static class Order
+        {
+            public const string OrderDateFormat = "yyyy-MM-dd H:mm";
+        }
     }
 }

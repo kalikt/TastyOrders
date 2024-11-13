@@ -24,9 +24,9 @@ namespace TastyOrders.Data.Configuration
                 .IsRequired()
                 .HasMaxLength(LastNameMaxLength);
 
-            builder
-                .Property(a => a.BirthDate)
-                .IsRequired();
+            builder.HasOne(u => u.Cart)
+                  .WithOne(c => c.User)
+                  .HasForeignKey<Cart>(c => c.UserId);
         }
     }
 }
