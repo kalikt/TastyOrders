@@ -34,6 +34,38 @@ namespace TastyOrders.Data.Configuration
             builder.HasMany(r => r.MenuItems)
                    .WithOne()
                    .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasData(this.SeedRestaurants());
+        }
+
+        private List<Restaurant> SeedRestaurants()
+        {
+            List<Restaurant> restaurants = new List<Restaurant>()
+            {
+                new Restaurant()
+                {
+                    Id = 1,
+                    Name = "Smash Burgers",
+                    Location = "Sofia",
+                    ImageUrl = "/images/smashBurger.png"
+                },
+                new Restaurant()
+                {
+                    Id = 2,
+                    Name = "Taste of Italy",
+                    Location = "Varna",
+                    ImageUrl = "/images/italyRestaurant.jpg"
+                },
+                new Restaurant()
+                {
+                    Id = 3,
+                    Name = "Sweet Place",
+                    Location = "Veliko Tarnovo",
+                    ImageUrl = "/images/sweetPlace.jpg"
+                }
+            };
+
+            return restaurants;
         }
     }
 }
