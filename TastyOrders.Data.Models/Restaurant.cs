@@ -14,5 +14,7 @@ namespace TastyOrders.Data.Models
 
         public string? ImageUrl { get; set; }
         public ICollection<MenuItem> MenuItems { get; set; } = new List<MenuItem>();
+
+        public ICollection<Review> Reviews { get; set; } = new List<Review>();
     }
 }

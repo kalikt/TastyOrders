@@ -26,6 +26,8 @@ public class TastyOrdersDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Cart> Carts { get; set; }
     public DbSet<CartItem> CartItems { get; set; }
 
+    public DbSet<Review> Reviews { get; set; }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfiguration(new ApplicationUserConfiguration());
@@ -35,6 +37,7 @@ public class TastyOrdersDbContext : IdentityDbContext<ApplicationUser>
         builder.ApplyConfiguration(new OrderItemConfiguration());
         builder.ApplyConfiguration(new CartConfiguration());
         builder.ApplyConfiguration(new CartItemConfiguration());
+        builder.ApplyConfiguration(new ReviewConfiguration());
 
         base.OnModelCreating(builder);
     }

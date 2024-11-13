@@ -40,5 +40,13 @@ namespace TastyOrders.Common
         {
             public const string OrderDateFormat = "yyyy-MM-dd H:mm";
         }
+
+        public static class Review 
+        {
+            public const int CommentMinLength = 5;
+            public const int CommentMaxLength = 300;
+            public const string CreatedAtDateFormat = "yyyy-MM-dd H:mm";
+        }
+
     }
 }
