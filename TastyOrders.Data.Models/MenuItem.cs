@@ -15,5 +15,8 @@ namespace TastyOrders.Data.Models
 
         public string? ImageUrl { get; set; }
         public decimal Price { get; set; }
+
+        public int RestaurantId { get; set; }
+        public Restaurant Restaurant { get; set; } = null!;
     }
 }

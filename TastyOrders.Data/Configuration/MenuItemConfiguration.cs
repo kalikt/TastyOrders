@@ -35,6 +35,26 @@ namespace TastyOrders.Data.Configuration
                 .Property(t => t.Price)
                 .IsRequired()
                 .HasColumnType("decimal(18,2)");
+
+            builder
+                .HasOne(mi => mi.Restaurant)
+                .WithMany(r => r.MenuItems)
+                .HasForeignKey(mi => mi.RestaurantId);
+
         }
+
+        //private List<MenuItem> SeedMenuItems()
+        //{
+        //    List<MenuItem> menuItems = new List<MenuItem>()
+        //    {
+        //        new MenuItem()
+        //        {
+        //            Name = "Veggie Burger",
+        //            Description = "Delicious plant-based burger",
+        //            Price = 12.99m,
+
+        //        }
+        //    }
+        //}
     }
 }
