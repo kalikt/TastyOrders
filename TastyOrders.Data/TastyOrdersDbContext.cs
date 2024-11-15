@@ -19,7 +19,6 @@ public class TastyOrdersDbContext : IdentityDbContext<ApplicationUser>
     {
     }
 
-    public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     public DbSet<Restaurant> Restaurants { get; set; }
     public DbSet<MenuItem> MenuItems { get; set; }
     public DbSet<Order> Orders { get; set; }

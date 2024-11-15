@@ -4,6 +4,7 @@ using TastyOrders.Data;
 
 namespace TastyOrders
 {
+    using TastyOrders.Data.Models;
     using TastyOrders.Web.Infrastructure.Extensions;
     public class Program
     {
@@ -17,7 +18,13 @@ namespace TastyOrders
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+            })
                 .AddEntityFrameworkStores<TastyOrdersDbContext>();
             builder.Services.AddControllersWithViews();
 
@@ -47,7 +54,7 @@ namespace TastyOrders
                 pattern: "{controller=Home}/{action=Index}/{id?}");
             app.MapRazorPages();
 
-            app.ApplyMigrations();
+            //app.ApplyMigrations();
 
             app.Run();
         }

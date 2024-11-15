@@ -11,7 +11,7 @@ using TastyOrders.Data;
 namespace TastyOrders.Data.Migrations
 {
     [DbContext(typeof(TastyOrdersDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    partial class TastyOrdersDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -177,16 +177,6 @@ namespace TastyOrders.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -683,8 +673,7 @@ namespace TastyOrders.Data.Migrations
 
             modelBuilder.Entity("TastyOrders.Data.Models.ApplicationUser", b =>
                 {
-                    b.Navigation("Cart")
-                        .IsRequired();
+                    b.Navigation("Cart");
 
                     b.Navigation("Orders");
                 });

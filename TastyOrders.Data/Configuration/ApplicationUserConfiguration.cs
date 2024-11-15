@@ -14,19 +14,11 @@ namespace TastyOrders.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
-            builder
-                .Property(a => a.FirstName)
-                .IsRequired()
-                .HasMaxLength(FirstNameMaxLength);
-
-            builder
-                .Property(a => a.LastName)
-                .IsRequired()
-                .HasMaxLength(LastNameMaxLength);
 
             builder.HasOne(u => u.Cart)
-                  .WithOne(c => c.User)
-                  .HasForeignKey<Cart>(c => c.UserId);
+       .WithOne(c => c.User)
+       .HasForeignKey<Cart>(c => c.UserId)
+       .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
