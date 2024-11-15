@@ -17,6 +17,13 @@
                     <h5 class="card-title">@menuItem.Name</h5>
                     <p class="card-text">@menuItem.Description</p>
                     <p class="card-text"><strong>Price: $@menuItem.Price</strong></p>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <form method="post" asp-action="AddToCart" asp-controller="Cart">
+                            <input type="hidden" name="menuItemId" value="@menuItem.Id" />
+                            <button type="submit" class="btn btn-primary">Add to Cart</button>
+                        </form>
+                    }
                 </div>
             </div>
         </div>
