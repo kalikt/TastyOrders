@@ -1,0 +1,24 @@
+﻿@model TastyOrders.Data.Models.Restaurant
+
+@{
+    ViewData["Title"] = $"{Model.Name} - Menu";
+}
+
+<h1>@Model.Name</h1>
+<p>@Model.Location</p>
+
+<div class="row">
+    @foreach (var menuItem in Model.MenuItems)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="@menuItem.ImageUrl" class="card-img-top" alt="@menuItem.Name" style="height: 200px; object-fit: cover;" />
+                <div class="card-body">
+                    <h5 class="card-title">@menuItem.Name</h5>
+                    <p class="card-text">@menuItem.Description</p>
+                    <p class="card-text"><strong>Price: $@menuItem.Price</strong></p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

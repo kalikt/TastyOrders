@@ -12,8 +12,8 @@ using TastyOrders.Data;
 namespace TastyOrders.Data.Migrations
 {
     [DbContext(typeof(TastyOrdersDbContext))]
-    [Migration("20241113121323_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20241115141756_NewInitial")]
+    partial class NewInitial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -311,7 +311,7 @@ namespace TastyOrders.Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("RestaurantId")
+                    b.Property<int>("RestaurantId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -319,6 +319,89 @@ namespace TastyOrders.Data.Migrations
                     b.HasIndex("RestaurantId");
 
                     b.ToTable("MenuItems");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Delicious plant-based burger",
+                            ImageUrl = "/images/veggieBurger.jpg",
+                            Name = "Veggie Burger",
+                            Price = 12.99m,
+                            RestaurantId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Delicious burger with fresh meat",
+                            ImageUrl = "/images/beefBurger.jpg",
+                            Name = "Beef Burger",
+                            Price = 18.99m,
+                            RestaurantId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Delicious burger with chicken and cheese",
+                            ImageUrl = "/images/chickenBurger.jpg",
+                            Name = "Chicken Burger",
+                            Price = 15.99m,
+                            RestaurantId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Classic Italian pasta with rich sauce",
+                            ImageUrl = "/images/meatPasta.jpg",
+                            Name = "Spaghetti Bolognese",
+                            Price = 16.50m,
+                            RestaurantId = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "Classic pizza with tomato, basil, and mozzarella",
+                            ImageUrl = "/images/pizzaM.jpg",
+                            Name = "Margherita Pizza",
+                            Price = 11.99m,
+                            RestaurantId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Description = "Fresh lettuce with Caesar dressing",
+                            ImageUrl = "/images/ceaserSalad.jpg",
+                            Name = "Caesar Salad",
+                            Price = 10.99m,
+                            RestaurantId = 2
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Description = "Our best seller",
+                            ImageUrl = "/images/cheesecake.jpg",
+                            Name = "Cheesecake",
+                            Price = 8.99m,
+                            RestaurantId = 3
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Description = "The richest chocolate taste you can find",
+                            ImageUrl = "/images/chokoCake.jpg",
+                            Name = "Chocolate cake",
+                            Price = 7.99m,
+                            RestaurantId = 3
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Description = "Tastiest cream brulee you can find",
+                            ImageUrl = "/images/creamB.jpg",
+                            Name = "Cream Brulee",
+                            Price = 5.99m,
+                            RestaurantId = 3
+                        });
                 });
 
             modelBuilder.Entity("TastyOrders.Data.Models.Order", b =>
@@ -400,6 +483,64 @@ namespace TastyOrders.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Restaurants");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ImageUrl = "/images/smashBurger.png",
+                            Location = "Sofia",
+                            Name = "Smash Burgers"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ImageUrl = "/images/italyRestaurant.jpg",
+                            Location = "Varna",
+                            Name = "Taste of Italy"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ImageUrl = "/images/sweetPlace.jpg",
+                            Location = "Veliko Tarnovo",
+                            Name = "Sweet Place"
+                        });
+                });
+
+            modelBuilder.Entity("TastyOrders.Data.Models.Review", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RestaurantId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RestaurantId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -485,10 +626,13 @@ namespace TastyOrders.Data.Migrations
 
             modelBuilder.Entity("TastyOrders.Data.Models.MenuItem", b =>
                 {
-                    b.HasOne("TastyOrders.Data.Models.Restaurant", null)
+                    b.HasOne("TastyOrders.Data.Models.Restaurant", "Restaurant")
                         .WithMany("MenuItems")
                         .HasForeignKey("RestaurantId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Restaurant");
                 });
 
             modelBuilder.Entity("TastyOrders.Data.Models.Order", b =>
@@ -521,6 +665,25 @@ namespace TastyOrders.Data.Migrations
                     b.Navigation("Order");
                 });
 
+            modelBuilder.Entity("TastyOrders.Data.Models.Review", b =>
+                {
+                    b.HasOne("TastyOrders.Data.Models.Restaurant", "Restaurant")
+                        .WithMany("Reviews")
+                        .HasForeignKey("RestaurantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TastyOrders.Data.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Restaurant");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("TastyOrders.Data.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Cart")
@@ -542,6 +705,8 @@ namespace TastyOrders.Data.Migrations
             modelBuilder.Entity("TastyOrders.Data.Models.Restaurant", b =>
                 {
                     b.Navigation("MenuItems");
+
+                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }

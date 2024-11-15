@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 using System.Reflection.Emit;
 using TastyOrders.Data.Configuration;
 using TastyOrders.Data.Models;
@@ -30,6 +31,7 @@ public class TastyOrdersDbContext : IdentityDbContext<ApplicationUser>
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        //builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         builder.ApplyConfiguration(new ApplicationUserConfiguration());
         builder.ApplyConfiguration(new RestaurantConfiguration());
         builder.ApplyConfiguration(new MenuItemConfiguration());

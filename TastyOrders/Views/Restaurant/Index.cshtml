@@ -1,0 +1,24 @@
+﻿@model IEnumerable<TastyOrders.Data.Models.Restaurant>
+
+@{
+    ViewData["Title"] = "Restaurants";
+}
+
+<h1>Restaurants</h1>
+<div class="container">
+    <div class="row">
+        @foreach (var restaurant in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="@restaurant.ImageUrl" class="card-img-top" alt="@restaurant.Name" style="height: 200px; object-fit: cover;" />
+                    <div class="card-body">
+                        <h5 class="card-title">@restaurant.Name</h5>
+                        <p class="card-text">@restaurant.Location</p>
+                        <a href="@Url.Action("Menu", "Restaurant", new { id = restaurant.Id })" class="btn btn-primary">View Menu</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
