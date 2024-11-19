@@ -3,31 +3,32 @@ using Microsoft.AspNetCore.Mvc;
 using TastyOrders.Data.Models;
 using TastyOrders.Data;
 using Microsoft.EntityFrameworkCore;
+using TastyOrders.Web.ViewModels.Cart;
 
 namespace TastyOrders.Web.Controllers
 {
     public class CartController : Controller
     {
-        private readonly TastyOrdersDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly TastyOrdersDbContext context;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public CartController(TastyOrdersDbContext context, UserManager<ApplicationUser> userManager)
         {
-            _context = context;
-            _userManager = userManager;
+            this.context = context;
+            this.userManager = userManager;
         }
 
         [HttpPost]
         public async Task<IActionResult> AddToCart(int menuItemId)
         {
-            var user = await _userManager.GetUserAsync(User);
+            var user = await userManager.GetUserAsync(User);
             if (user == null)
             {
                 return Unauthorized();
             }
 
             // Ensure the user's cart exists
-            var cart = await _context.Carts
+            var cart = await context.Carts
                 .Include(c => c.CartItems)
                 .FirstOrDefaultAsync(c => c.UserId == user.Id);
 
@@ -38,7 +39,7 @@ namespace TastyOrders.Web.Controllers
                     UserId = user.Id,
                     CartItems = new List<CartItem>()
                 };
-                _context.Carts.Add(cart);
+                context.Carts.Add(cart);
             }
 
             // Check if the item is already in the cart
@@ -51,7 +52,7 @@ namespace TastyOrders.Web.Controllers
             else
             {
                 // Add the item to the cart
-                var menuItem = await _context.MenuItems.FindAsync(menuItemId);
+                var menuItem = await context.MenuItems.FindAsync(menuItemId);
                 if (menuItem == null)
                 {
                     return NotFound();
@@ -65,27 +66,36 @@ namespace TastyOrders.Web.Controllers
                 cart.CartItems.Add(cartItem);
             }
 
-            await _context.SaveChangesAsync();
+            await context.SaveChangesAsync();
 
             TempData["SuccessMessage"] = "Item added to cart!";
-            return RedirectToAction("Index", "Menu");
+            return RedirectToAction("Index", "Cart");
         }
         public async Task<IActionResult> Index()
         {
-            var user = await _userManager.GetUserAsync(User);
+            var user = await userManager.GetUserAsync(User);
             if (user == null)
             {
                 return Unauthorized();
             }
 
-            var cart = await _context.Carts
-                .Include(c => c.CartItems)
-                .ThenInclude(ci => ci.MenuItem)
-                .FirstOrDefaultAsync(c => c.UserId == user.Id);
-
-            if (cart == null || !cart.CartItems.Any())
+            var cart = await context.Carts
+            .Where(c => c.UserId == user.Id) 
+            .Select(c => new CartViewModel
             {
-                return View("EmptyCart");
+                Items = c.CartItems.Select(i => new CartItemViewModel
+                {
+                    Id = i.Id,
+                    Name = i.MenuItem.Name,
+                    Price = i.MenuItem.Price,
+                    Quantity = i.Quantity
+                }).ToList()
+            })
+            .FirstOrDefaultAsync();
+
+            if (cart == null)
+            {
+                cart = new CartViewModel(); 
             }
 
             return View(cart);
@@ -95,14 +105,14 @@ namespace TastyOrders.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateQuantity(int cartItemId, int quantity)
         {
-            var cartItem = await _context.CartItems.FindAsync(cartItemId);
+            var cartItem = await context.CartItems.FindAsync(cartItemId);
             if (cartItem == null || quantity < 1)
             {
                 return BadRequest();
             }
 
             cartItem.Quantity = quantity;
-            await _context.SaveChangesAsync();
+            await context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
@@ -111,14 +121,14 @@ namespace TastyOrders.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> RemoveItem(int cartItemId)
         {
-            var cartItem = await _context.CartItems.FindAsync(cartItemId);
+            var cartItem = await context.CartItems.FindAsync(cartItemId);
             if (cartItem == null)
             {
                 return NotFound();
             }
 
-            _context.CartItems.Remove(cartItem);
-            await _context.SaveChangesAsync();
+            context.CartItems.Remove(cartItem);
+            await context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
