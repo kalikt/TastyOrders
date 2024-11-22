@@ -10,6 +10,8 @@
 <p><strong>Order ID:</strong> @Model.Id</p>
 <p><strong>Order Date:</strong> @Model.OrderDate.ToString()</p>
 <p><strong>Total Amount:</strong> $@Model.TotalAmount</p>
+<p><strong>Restaurant:</strong> @Model.RestaurantName</p>
+<p><strong>Location:</strong> @Model.RestaurantLocation</p>
 
 <table class="table table-striped">
     <thead>
@@ -31,4 +33,4 @@
     </tbody>
 </table>
 
-<a href="/" class="btn btn-primary">Continue Shopping</a>
+<a href="@Url.Action("Index", "Restaurant")" class="btn btn-primary">Continue Shopping</a>

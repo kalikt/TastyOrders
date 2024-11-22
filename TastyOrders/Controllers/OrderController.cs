@@ -100,6 +100,7 @@ namespace TastyOrders.Web.Controllers
             var order = await context.Orders
                 .Include(o => o.OrderItems)
                 .ThenInclude(oi => oi.MenuItem)
+                .ThenInclude(mi => mi.Restaurant)
                 .FirstOrDefaultAsync(o => o.Id == id && o.UserId == user.Id);
 
             if (order == null)
@@ -112,6 +113,8 @@ namespace TastyOrders.Web.Controllers
                 Id = order.Id,
                 OrderDate = order.OrderDate.ToString(OrderDateFormat),
                 TotalAmount = order.TotalPrice,
+                RestaurantName = order.OrderItems.FirstOrDefault()?.MenuItem.Restaurant.Name ?? string.Empty,
+                RestaurantLocation = order.OrderItems.FirstOrDefault()?.MenuItem.Restaurant.Location ?? string.Empty,
                 Items = order.OrderItems.Select(oi => new OrderItemViewModel
                 {
                     Name = oi.MenuItem.Name,
