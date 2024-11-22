@@ -27,19 +27,45 @@ namespace TastyOrders.Web.Controllers
                 return Unauthorized();
             }
 
+            // Retrieve the menu item and its restaurant
+            var menuItem = await context.MenuItems
+                .Include(mi => mi.Restaurant)
+                .FirstOrDefaultAsync(mi => mi.Id == menuItemId);
+
+            if (menuItem == null)
+            {
+                return NotFound();
+            }
+
             // Ensure the user's cart exists
             var cart = await context.Carts
                 .Include(c => c.CartItems)
+                .ThenInclude(ci => ci.MenuItem)
+                .ThenInclude(mi => mi.Restaurant)
                 .FirstOrDefaultAsync(c => c.UserId == user.Id);
 
             if (cart == null)
             {
+                // Create a new cart if none exists
                 cart = new Cart
                 {
                     UserId = user.Id,
                     CartItems = new List<CartItem>()
                 };
                 context.Carts.Add(cart);
+            }
+            else
+            {
+                // Check if cart already contains items from a different location
+                var existingLocation = cart.CartItems
+                    .Select(ci => ci.MenuItem.Restaurant.Location)
+                    .FirstOrDefault();
+
+                if (existingLocation != null && existingLocation != menuItem.Restaurant.Location)
+                {
+                    TempData["ErrorMessage"] = $"You can only add items from the same location ({existingLocation}).";
+                    return RedirectToAction("Index", "Cart");
+                }
             }
 
             // Check if the item is already in the cart
@@ -52,12 +78,6 @@ namespace TastyOrders.Web.Controllers
             else
             {
                 // Add the item to the cart
-                var menuItem = await context.MenuItems.FindAsync(menuItemId);
-                if (menuItem == null)
-                {
-                    return NotFound();
-                }
-
                 var cartItem = new CartItem
                 {
                     MenuItemId = menuItem.Id,

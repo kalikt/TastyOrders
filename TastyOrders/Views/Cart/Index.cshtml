@@ -7,6 +7,20 @@
 
 <h1>Your Cart</h1>
 
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -46,5 +60,5 @@
     <h4>Total: $@Model.Total</h4>
 </div>
 
-<a href="@Url.Action("Index", "Restaurant")" class="btn btn-primary">Continue Shopping</a>
+<a href="@Url.Action("Index", "Restaurant", new { location = Model.SelectedLocation })" class="btn btn-primary">Continue Shopping</a>
 <a href="/Checkout" class="btn btn-success">Place Order</a>

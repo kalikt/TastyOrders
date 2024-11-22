@@ -12,13 +12,13 @@ namespace TastyOrders.Web.Infrastructure.Extensions
 {
     public static class ExtensionMethods
     { 
-        public static IApplicationBuilder ApplyMigrations(this IApplicationBuilder app)
-        {
-            using IServiceScope serviceScope = app.ApplicationServices.CreateScope();
-            TastyOrdersDbContext dbContext = serviceScope.ServiceProvider.GetRequiredService<TastyOrdersDbContext>()!;
-            dbContext.Database.Migrate();
+        //public static IApplicationBuilder ApplyMigrations(this IApplicationBuilder app)
+        //{
+        //    using IServiceScope serviceScope = app.ApplicationServices.CreateScope();
+        //    TastyOrdersDbContext dbContext = serviceScope.ServiceProvider.GetRequiredService<TastyOrdersDbContext>()!;
+        //    dbContext.Database.Migrate();
 
-            return app;
-        }
+        //    return app;
+        //}
     }
 }

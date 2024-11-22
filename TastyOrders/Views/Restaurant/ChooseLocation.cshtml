@@ -1,0 +1,22 @@
+﻿@using TastyOrders.Web.ViewModels.Restaurant;
+@model LocationSelectionViewModel
+
+@{
+    ViewData["Title"] = "Choose Location";
+}
+
+<h1>Choose Your Location</h1>
+
+<form asp-action="ChooseLocation" method="post">
+    <div class="form-group">
+        <label for="SelectedLocation">Location</label>
+        <select id="SelectedLocation" name="SelectedLocation" class="form-control" required>
+            <option value="">-- Select a Location --</option>
+            @foreach (var location in Model.Locations)
+            {
+                <option value="@location">@location</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Proceed</button>
+</form>

@@ -12,5 +12,7 @@ namespace TastyOrders.Web.ViewModels.Cart
             = new List<CartItemViewModel>();
 
         public decimal Total => Items.Sum(i => i.Total);
+
+        public string SelectedLocation { get; set; } = null!;
     }
 }

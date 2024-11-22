@@ -1,14 +1,14 @@
 ﻿@using TastyOrders.Web.ViewModels.Restaurant;
-@model IEnumerable<RestaurantIndexViewModel>
-
+@model RestaurantsWithLocationViewModel
+        
 @{
     ViewData["Title"] = "Restaurants";
 }
 
-<h1>Restaurants</h1>
+<h1>Restaurants in @Model.SelectedLocation</h1>
 <div class="container">
     <div class="row">
-        @foreach (var restaurant in Model)
+        @foreach (var restaurant in Model.Restaurants)
         {
             <div class="col-md-4 mb-4">
                 <div class="card">

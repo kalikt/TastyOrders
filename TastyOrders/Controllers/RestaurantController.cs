@@ -14,10 +14,46 @@ namespace TastyOrders.Web.Controllers
             this.context = context;
         }
 
-        // GET: Restaurant
-        public async Task<IActionResult> Index()
+        public IActionResult ChooseLocation()
         {
+            var locations = context.Restaurants
+                .Select(r => r.Location)
+                .Distinct()
+                .ToList();
+
+            var model = new LocationSelectionViewModel
+            {
+                Locations = locations
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult ChooseLocation(LocationSelectionViewModel model)
+        {
+            if (string.IsNullOrEmpty(model.SelectedLocation))
+            {
+                ModelState.AddModelError("", "Please select a location.");
+                return View(model);
+            }
+                
+            TempData["SelectedLocation"] = model.SelectedLocation;
+
+            // Redirect to the restaurants listing page with the selected location as a query parameter
+            return RedirectToAction("Index", new { location = model.SelectedLocation });
+        }
+
+        // GET: Restaurant
+        public async Task<IActionResult> Index(string location)
+        {
+            if (string.IsNullOrEmpty(location))
+            {
+                return RedirectToAction("ChooseLocation");
+            }
+
             var restaurants = await context.Restaurants
+                .Where(r => r.Location == location)
                 .Select(r => new RestaurantIndexViewModel
             {
                 Id = r.Id,
@@ -26,7 +62,13 @@ namespace TastyOrders.Web.Controllers
                 ImageUrl = r.ImageUrl ?? string.Empty
             }).ToListAsync();
 
-            return View(restaurants);
+            var model = new RestaurantsWithLocationViewModel
+            {
+                SelectedLocation = location,
+                Restaurants = restaurants
+            };
+
+            return View(model);
         }
 
         // GET: Restaurant/Menu/5
