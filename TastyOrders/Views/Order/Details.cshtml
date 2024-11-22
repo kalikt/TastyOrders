@@ -1,0 +1,34 @@
+﻿@using TastyOrders.Web.ViewModels.Order;
+@model OrderDetailsViewModel
+
+@{
+    ViewData["Title"] = "Order Details";
+}
+
+<h1>Order Details</h1>
+
+<p><strong>Order ID:</strong> @Model.Id</p>
+<p><strong>Order Date:</strong> @Model.OrderDate.ToString()</p>
+<p><strong>Total Amount:</strong> $@Model.TotalAmount</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Quantity</td>
+                <td>$@item.Price</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="/" class="btn btn-primary">Continue Shopping</a>

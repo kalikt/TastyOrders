@@ -61,4 +61,7 @@
 </div>
 
 <a href="@Url.Action("Index", "Restaurant", new { location = Model.SelectedLocation })" class="btn btn-primary">Continue Shopping</a>
-<a href="/Checkout" class="btn btn-success">Place Order</a>
+<form asp-action="PlaceOrder" asp-controller="Order" method="post" style="display: inline;">
+    <button type="submit" class="btn btn-success">Place Order</button>
+</form>
+

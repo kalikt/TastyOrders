@@ -1,0 +1,43 @@
+﻿@using TastyOrders.Web.ViewModels.Order;
+@model IEnumerable<OrderSummaryViewModel>
+
+@{
+    ViewData["Title"] = "Your Orders";
+}
+
+<h1>Your Orders</h1>
+
+@if (!Model.Any())
+{
+    <p>You haven't placed any orders yet.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Order Date</th>
+                <th>Total Amount</th>
+                <th>Items</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.Id</td>
+                    <td>@order.OrderDate.ToString()</td>
+                    <td>$@order.TotalAmount</td>
+                    <td>
+                        @string.Join(", ", order.Items)
+                    </td>
+                    <td>
+                        <a asp-controller="Order" asp-action="Details" asp-route-id="@order.Id" class="btn btn-primary btn-sm">View Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
