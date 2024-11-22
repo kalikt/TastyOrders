@@ -5,18 +5,52 @@
     ViewData["Title"] = "Choose Location";
 }
 
-<h1>Choose Your Location</h1>
+<h1 class="text-center mb-4">Choose Your Location</h1>
 
-<form asp-action="ChooseLocation" method="post">
-    <div class="form-group">
-        <label for="SelectedLocation">Location</label>
-        <select id="SelectedLocation" name="SelectedLocation" class="form-control" required>
-            <option value="">-- Select a Location --</option>
-            @foreach (var location in Model.Locations)
-            {
-                <option value="@location">@location</option>
-            }
-        </select>
+<div class="container">
+    <div class="row justify-content-center">
+        @foreach (var location in Model.Locations)
+        {
+            <div class="col-md-4 mb-4 d-flex justify-content-center">
+                <form asp-action="ChooseLocation" method="post">
+                    <input type="hidden" name="SelectedLocation" value="@location" />
+                    <button type="submit" class="btn location-button">
+                        @location
+                    </button>
+                </form>
+            </div>
+        }
     </div>
-    <button type="submit" class="btn btn-primary mt-3">Proceed</button>
-</form>
+</div>
+
+<style>
+    /* Styling for buttons */
+    .location-button {
+        width: 200px; /* Fixed width */
+        height: 150px; /* Fixed height */
+        border: none;
+        border-radius: 10px;
+        background-color: #007bff;
+        color: white;
+        font-size: 1.5rem;
+        font-weight: bold;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .location-button:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+        box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Ensure equal spacing for grid layout */
+    .col-md-4 {
+        display: flex;
+        justify-content: center;
+    }
+</style>

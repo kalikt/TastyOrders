@@ -100,18 +100,24 @@ namespace TastyOrders.Web.Controllers
             }
 
             var cart = await context.Carts
-            .Where(c => c.UserId == user.Id) 
-            .Select(c => new CartViewModel
+        .Where(c => c.UserId == user.Id)
+        .Include(c => c.CartItems)
+        .ThenInclude(ci => ci.MenuItem)
+        .ThenInclude(mi => mi.Restaurant)
+        .Select(c => new CartViewModel
+        {
+            Items = c.CartItems.Select(i => new CartItemViewModel
             {
-                Items = c.CartItems.Select(i => new CartItemViewModel
-                {
-                    Id = i.Id,
-                    Name = i.MenuItem.Name,
-                    Price = i.MenuItem.Price,
-                    Quantity = i.Quantity
-                }).ToList()
-            })
-            .FirstOrDefaultAsync();
+                Id = i.Id,
+                Name = i.MenuItem.Name,
+                Price = i.MenuItem.Price,
+                Quantity = i.Quantity
+            }).ToList(),
+            SelectedLocation = c.CartItems
+                .Select(ci => ci.MenuItem.Restaurant.Location)
+                .FirstOrDefault() // All items should share the same location
+        })
+        .FirstOrDefaultAsync();
 
             if (cart == null)
             {
