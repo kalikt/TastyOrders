@@ -4,8 +4,8 @@ using TastyOrders.Data;
 
 namespace TastyOrders
 {
+    using TastyOrders.Data.Configuration;
     using TastyOrders.Data.Models;
-    using TastyOrders.Web.Infrastructure.Extensions;
     public class Program
     {
         public static void Main(string[] args)
@@ -18,17 +18,27 @@ namespace TastyOrders
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequireDigit = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
             })
-                .AddEntityFrameworkStores<TastyOrdersDbContext>();
+                .AddEntityFrameworkStores<TastyOrdersDbContext>()
+                .AddDefaultTokenProviders();
+            
+            ;
             builder.Services.AddControllersWithViews();
+            builder.Services.AddRazorPages();
 
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                RoleInitializer.SeedRolesAndAdminAsync(services).GetAwaiter().GetResult();
+            }
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -47,6 +57,7 @@ namespace TastyOrders
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
