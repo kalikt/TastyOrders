@@ -20,12 +20,12 @@ namespace TastyOrders
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
-                options.SignIn.RequireConfirmedAccount = false;
-                options.Password.RequireDigit = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
+                ConfigureIdentity(builder, options);
             })
                 .AddEntityFrameworkStores<TastyOrdersDbContext>()
+                .AddRoles<IdentityRole>()
+                .AddSignInManager<SignInManager<ApplicationUser>>()
+                .AddUserManager<UserManager<ApplicationUser>>()
                 .AddDefaultTokenProviders();
             
             ;
@@ -33,12 +33,6 @@ namespace TastyOrders
             builder.Services.AddRazorPages();
 
             var app = builder.Build();
-
-            using (var scope = app.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                RoleInitializer.SeedRolesAndAdminAsync(services).GetAwaiter().GetResult();
-            }
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -58,16 +52,54 @@ namespace TastyOrders
             app.UseRouting();
 
             app.UseAuthentication();
+
             app.UseAuthorization();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                RoleInitializer.SeedRolesAndAdminAsync(services).GetAwaiter().GetResult();
+            }
+
+            app.MapControllerRoute(
+            name: "Areas",
+            pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
             app.MapRazorPages();
 
             //app.ApplyMigrations();
 
             app.Run();
+        }
+
+        private static void ConfigureIdentity(WebApplicationBuilder builder, IdentityOptions options)
+        {
+            options.Password.RequireDigit = builder.Configuration
+                .GetValue<bool>("Identity:Password:RequireDigit");
+            options.Password.RequireLowercase = builder.Configuration
+            .GetValue<bool>("Identity:Password:RequireLowercase");
+            options.Password.RequireUppercase = builder.Configuration
+            .GetValue<bool>("Identity:Password:RequireUppercase");
+            options.Password.RequireNonAlphanumeric = builder.Configuration
+            .GetValue<bool>("Identity:Password:RequireNonAplhanumerical");
+            options.Password.RequiredLength = builder.Configuration
+            .GetValue<int>("Identity:Password:RequireLength");
+            options.Password.RequiredUniqueChars = builder.Configuration
+            .GetValue<int>("Identity:Password:RequireUniqueCharacters");
+
+            options.SignIn.RequireConfirmedAccount = builder.Configuration
+            .GetValue<bool>("Identity:Password:RequireConfirmedAccount");
+            options.SignIn.RequireConfirmedEmail = builder.Configuration
+            .GetValue<bool>("Identity:Password:RequireConfirmedEmail");
+            options.SignIn.RequireConfirmedPhoneNumber = builder.Configuration
+            .GetValue<bool>("Identity:Password:RequireConfirmedPhoneNumber");
+
+            options.User.RequireUniqueEmail = builder.Configuration
+            .GetValue<bool>("Identity:Password:RequireUniqueEmail");
         }
     }
 }

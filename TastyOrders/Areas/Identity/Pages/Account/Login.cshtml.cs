@@ -15,9 +15,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using TastyOrders.Data.Models;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 namespace TastyOrders.Web.Areas.Identity.Pages.Account
 {
+    using static Common.ApplicationConstants;
     public class LoginModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
