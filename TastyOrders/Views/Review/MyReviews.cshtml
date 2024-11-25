@@ -1,0 +1,41 @@
+﻿@using TastyOrders.Web.ViewModels.Review;
+@model IEnumerable<MyReviewsViewModel>
+
+@{
+    ViewData["Title"] = "My Reviews";
+}
+
+<h1>My Reviews</h1>
+
+@if (!Model.Any())
+{
+    <p>You haven't left any reviews yet.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Restaurant</th>
+                <th>Rating</th>
+                <th>Comment</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var review in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-controller="Restaurant" asp-action="Details" asp-route-id="@review.RestaurantId">
+                            @review.RestaurantName
+                        </a>
+                    </td>
+                    <td>@review.Rating/5</td>
+                    <td>@review.Comment</td>
+                    <td>@review.CreatedAt.ToString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

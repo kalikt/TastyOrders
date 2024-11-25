@@ -8,6 +8,7 @@ using TastyOrders.Web.ViewModels.Review;
 
 namespace TastyOrders.Web.Controllers
 {
+    using static Common.EntityValidationConstants.Review;
     public class ReviewController : Controller
     {
         private readonly TastyOrdersDbContext context;
@@ -75,6 +76,28 @@ namespace TastyOrders.Web.Controllers
                     RestaurantName = r.Restaurant.Name,
                     Rating = r.Rating,
                     Comment = r.Comment
+                })
+                .ToListAsync();
+
+            return View(reviews);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> MyReviews()
+        {
+            var userId = this.userManager.GetUserId(User)!;
+
+            var reviews = await context.Reviews
+                .Where(r => r.UserId == userId)
+                .Include(r => r.Restaurant)
+                .OrderByDescending(r => r.CreatedAt)
+                .Select(r => new MyReviewsViewModel
+                {
+                    RestaurantName = r.Restaurant.Name,
+                    RestaurantId = r.Restaurant.Id,
+                    Rating = r.Rating,
+                    Comment = r.Comment,
+                    CreatedAt = r.CreatedAt.ToString(CreatedAtDateFormat)
                 })
                 .ToListAsync();
 
