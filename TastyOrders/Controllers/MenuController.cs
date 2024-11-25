@@ -1,46 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using TastyOrders.Data;
-using TastyOrders.Web.ViewModels.Restaurant;
+using TastyOrders.Services.Data.Interfaces;
 
 namespace TastyOrders.Web.Controllers
 {
     public class MenuController : Controller
     {
-        private readonly TastyOrdersDbContext context;
+        private readonly IMenuService menuService;
 
-        public MenuController(TastyOrdersDbContext context)
+        public MenuController(IMenuService menuService)
         {
-            this.context = context;
+            this.menuService = menuService;
         }
+
         [HttpGet]
         public async Task<IActionResult> Menu(int id)
         {
-            var restaurant = await context.Restaurants
-            .Where(r => r.Id == id)
-            .Select(r => new RestaurantMenuViewModel
-            {
-                Id = r.Id,
-                Name = r.Name,
-                Location = r.Location,
-                MenuItems = r.MenuItems.Select(m => new MenuItemViewModel
-                {
-                    Id = m.Id,
-                    Name = m.Name,
-                    Description = m.Description,
-                    ImageUrl = m.ImageUrl ?? string.Empty,
-                    Price = m.Price
-                }).ToList()
-            })
-            .FirstOrDefaultAsync();
+            var restaurantMenu = await menuService.GetRestaurantMenuAsync(id);
 
-            if (restaurant == null)
+            if (restaurantMenu == null)
             {
                 return NotFound();
             }
 
-            return View(restaurant);
+            return View(restaurantMenu);
         }
-
     }
 }
