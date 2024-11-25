@@ -8,6 +8,7 @@ namespace TastyOrders
     using TastyOrders.Data.Models;
     using TastyOrders.Services.Data.Interfaces;
     using TastyOrders.Services.Data;
+    using Microsoft.AspNetCore.Identity.UI.Services;
 
     public class Program
     {
@@ -26,12 +27,8 @@ namespace TastyOrders
                 ConfigureIdentity(builder, options);
             })
                 .AddEntityFrameworkStores<TastyOrdersDbContext>()
-                .AddRoles<IdentityRole>()
-                .AddSignInManager<SignInManager<ApplicationUser>>()
-                .AddUserManager<UserManager<ApplicationUser>>()
                 .AddDefaultTokenProviders();
-            
-            ;
+
 
             builder.Services.AddScoped<IRestaurantService, RestaurantService>();
             builder.Services.AddScoped<ICartService, CartService>();
