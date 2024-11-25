@@ -75,35 +75,6 @@ namespace TastyOrders.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Menu(int id)
-        {
-            var restaurant = await context.Restaurants
-            .Where(r => r.Id == id)
-            .Select(r => new RestaurantMenuViewModel
-            {
-                Id = r.Id,
-                Name = r.Name,
-                Location = r.Location,
-                MenuItems = r.MenuItems.Select(m => new MenuItemViewModel
-                {
-                    Id = m.Id,
-                    Name = m.Name,
-                    Description = m.Description,
-                    ImageUrl = m.ImageUrl ?? string.Empty,
-                    Price = m.Price
-                }).ToList()
-            })
-            .FirstOrDefaultAsync();
-
-            if (restaurant == null)
-            {
-                return NotFound();
-            }
-
-            return View(restaurant);
-        }
-
-        [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
             var restaurant = await context.Restaurants
