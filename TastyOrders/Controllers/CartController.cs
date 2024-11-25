@@ -5,18 +5,20 @@ using TastyOrders.Data;
 using Microsoft.EntityFrameworkCore;
 using TastyOrders.Web.ViewModels.Cart;
 using Microsoft.AspNetCore.Authorization;
+using TastyOrders.Services.Data.Interfaces;
 
 namespace TastyOrders.Web.Controllers
 {
     [Authorize]
     public class CartController : Controller
     {
-        private readonly TastyOrdersDbContext context;
+        private readonly ICartService cartService;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public CartController(TastyOrdersDbContext context, UserManager<ApplicationUser> userManager)
+        public CartController(ICartService cartService,
+            UserManager<ApplicationUser> userManager)
         {
-            this.context = context;
+            this.cartService = cartService;
             this.userManager = userManager;
         }
 
@@ -29,70 +31,19 @@ namespace TastyOrders.Web.Controllers
                 return Unauthorized();
             }
 
-            // Retrieve the menu item and its restaurant
-            var menuItem = await context.MenuItems
-                .Include(mi => mi.Restaurant)
-                .FirstOrDefaultAsync(mi => mi.Id == menuItemId);
+            var success = await cartService.AddToCartAsync(user.Id, menuItemId);
 
-            if (menuItem == null)
+            if (!success)
             {
-                return NotFound();
+                TempData["ErrorMessage"] = "Unable to add item to cart. Ensure all items are from the same location.";
+                return RedirectToAction(nameof(Index));
             }
-
-            // Ensure the user's cart exists
-            var cart = await context.Carts
-                .Include(c => c.CartItems)
-                .ThenInclude(ci => ci.MenuItem)
-                .ThenInclude(mi => mi.Restaurant)
-                .FirstOrDefaultAsync(c => c.UserId == user.Id);
-
-            if (cart == null)
-            {
-                // Create a new cart if none exists
-                cart = new Cart
-                {
-                    UserId = user.Id,
-                    CartItems = new List<CartItem>()
-                };
-                context.Carts.Add(cart);
-            }
-            else
-            {
-                // Check if cart already contains items from a different location
-                var existingLocation = cart.CartItems
-                    .Select(ci => ci.MenuItem.Restaurant.Location)
-                    .FirstOrDefault();
-
-                if (existingLocation != null && existingLocation != menuItem.Restaurant.Location)
-                {
-                    TempData["ErrorMessage"] = $"You can only add items from the same location ({existingLocation}).";
-                    return RedirectToAction("Index", "Cart");
-                }
-            }
-
-            // Check if the item is already in the cart
-            var existingItem = cart.CartItems.FirstOrDefault(i => i.MenuItemId == menuItemId);
-            if (existingItem != null)
-            {
-                // Increment the quantity
-                existingItem.Quantity++;
-            }
-            else
-            {
-                // Add the item to the cart
-                var cartItem = new CartItem
-                {
-                    MenuItemId = menuItem.Id,
-                    Quantity = 1
-                };
-                cart.CartItems.Add(cartItem);
-            }
-
-            await context.SaveChangesAsync();
 
             TempData["SuccessMessage"] = "Item added to cart!";
-            return RedirectToAction("Index", "Cart");
+            return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var user = await userManager.GetUserAsync(User);
@@ -101,31 +52,7 @@ namespace TastyOrders.Web.Controllers
                 return Unauthorized();
             }
 
-            var cart = await context.Carts
-        .Where(c => c.UserId == user.Id)
-        .Include(c => c.CartItems)
-        .ThenInclude(ci => ci.MenuItem)
-        .ThenInclude(mi => mi.Restaurant)
-        .Select(c => new CartViewModel
-        {
-            Items = c.CartItems.Select(i => new CartItemViewModel
-            {
-                Id = i.Id,
-                Name = i.MenuItem.Name,
-                Price = i.MenuItem.Price,
-                Quantity = i.Quantity
-            }).ToList(),
-            SelectedLocation = c.CartItems
-                .Select(ci => ci.MenuItem.Restaurant.Location) 
-                .FirstOrDefault() // All items should share the same location
-        })
-        .FirstOrDefaultAsync();
-
-            if (cart == null)
-            {
-                cart = new CartViewModel(); 
-            }
-
+            var cart = await cartService.GetCartAsync(user.Id);
             return View(cart);
         }
 
@@ -133,14 +60,12 @@ namespace TastyOrders.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateQuantity(int cartItemId, int quantity)
         {
-            var cartItem = await context.CartItems.FindAsync(cartItemId);
-            if (cartItem == null || quantity < 1)
+            var success = await cartService.UpdateQuantityAsync(cartItemId, quantity);
+
+            if (!success)
             {
                 return BadRequest();
             }
-
-            cartItem.Quantity = quantity;
-            await context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
@@ -149,14 +74,12 @@ namespace TastyOrders.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> RemoveItem(int cartItemId)
         {
-            var cartItem = await context.CartItems.FindAsync(cartItemId);
-            if (cartItem == null)
+            var success = await cartService.RemoveItemAsync(cartItemId);
+
+            if (!success)
             {
                 return NotFound();
             }
-
-            context.CartItems.Remove(cartItem);
-            await context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
