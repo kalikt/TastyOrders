@@ -1,25 +1,21 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TastyOrders.Data.Models;
-using TastyOrders.Data;
-using TastyOrders.Web.ViewModels.Order;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using TastyOrders.Services.Data.Interfaces;
 
 namespace TastyOrders.Web.Controllers
 {
-    using static Common.EntityValidationConstants.Order;
-
     [Authorize]
     public class OrderController : Controller
     {
-        private readonly TastyOrdersDbContext context;  
+        private readonly IOrderService orderService;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public OrderController(TastyOrdersDbContext context,
+        public OrderController(IOrderService orderService,
             UserManager<ApplicationUser> userManager)
         {
-            this.context = context;
+            this.orderService = orderService;
             this.userManager = userManager;
         }
 
@@ -31,19 +27,7 @@ namespace TastyOrders.Web.Controllers
                 return Unauthorized();
             }
 
-            var orders = await context.Orders
-                .Where(o => o.UserId == user.Id)
-                .Include(o => o.OrderItems)
-                .ThenInclude(oi => oi.MenuItem)
-                .Select(o => new OrderSummaryViewModel
-                {
-                    Id = o.Id,
-                    OrderDate = o.OrderDate.ToString(OrderDateFormat),
-                    TotalAmount = o.TotalPrice,
-                    Items = o.OrderItems.Select(oi => oi.MenuItem.Name).ToList()
-                })
-                .ToListAsync();
-
+            var orders = await orderService.GetUserOrdersAsync(user.Id);
             return View(orders);
         }
 
@@ -56,40 +40,16 @@ namespace TastyOrders.Web.Controllers
                 return Unauthorized();
             }
 
-            // Retrieve user's cart
-            var cart = await context.Carts
-                .Include(c => c.CartItems)
-                .ThenInclude(ci => ci.MenuItem)
-                .FirstOrDefaultAsync(c => c.UserId == user.Id);
+            var success = await orderService.PlaceOrderAsync(user.Id);
 
-            if (cart == null || !cart.CartItems.Any())
+            if (!success)
             {
                 TempData["ErrorMessage"] = "Your cart is empty!";
                 return RedirectToAction("Index", "Cart");
             }
 
-            // Create a new order
-            var order = new Order
-            {
-                UserId = user.Id,
-                OrderDate = DateTime.UtcNow,
-                TotalPrice = cart.CartItems.Sum(ci => ci.Quantity * ci.MenuItem.Price),
-                OrderItems = cart.CartItems.Select(ci => new OrderItem
-                {
-                    MenuItemId = ci.MenuItemId,
-                    Quantity = ci.Quantity,
-                    Price = ci.MenuItem.Price
-                }).ToList()
-            };
-
-            context.Orders.Add(order);
-
-            // Clear the cart
-            context.CartItems.RemoveRange(cart.CartItems);
-            await context.SaveChangesAsync();
-
             TempData["SuccessMessage"] = "Your order has been placed successfully!";
-            return RedirectToAction("Details", new { id = order.Id });
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Details(int id)
@@ -100,33 +60,14 @@ namespace TastyOrders.Web.Controllers
                 return Unauthorized();
             }
 
-            var order = await context.Orders
-                .Include(o => o.OrderItems)
-                .ThenInclude(oi => oi.MenuItem)
-                .ThenInclude(mi => mi.Restaurant)
-                .FirstOrDefaultAsync(o => o.Id == id && o.UserId == user.Id);
+            var orderDetails = await orderService.GetOrderDetailsAsync(id, user.Id);
 
-            if (order == null)
+            if (orderDetails == null)
             {
                 return NotFound();
             }
 
-            var model = new OrderDetailsViewModel
-            {
-                Id = order.Id,
-                OrderDate = order.OrderDate.ToString(OrderDateFormat),
-                TotalAmount = order.TotalPrice,
-                RestaurantName = order.OrderItems.FirstOrDefault()?.MenuItem.Restaurant.Name ?? string.Empty,
-                RestaurantLocation = order.OrderItems.FirstOrDefault()?.MenuItem.Restaurant.Location ?? string.Empty,
-                Items = order.OrderItems.Select(oi => new OrderItemViewModel
-                {
-                    Name = oi.MenuItem.Name,
-                    Quantity = oi.Quantity,
-                    Price = oi.Price
-                }).ToList()
-            };
-
-            return View(model);
+            return View(orderDetails);
         }
     }
 }
