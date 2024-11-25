@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TastyOrders.Data;
 using TastyOrders.Web.ViewModels.Restaurant;
@@ -46,7 +47,7 @@ namespace TastyOrders.Web.Controllers
             return RedirectToAction("Index", new { location = model.SelectedLocation });
         }
 
-        // GET: Restaurant
+        [HttpGet]
         public async Task<IActionResult> Index(string location)
         {
             if (string.IsNullOrEmpty(location))
@@ -73,7 +74,7 @@ namespace TastyOrders.Web.Controllers
             return View(model);
         }
 
-        // GET: Restaurant/Menu/5
+        [HttpGet]
         public async Task<IActionResult> Menu(int id)
         {
             var restaurant = await context.Restaurants

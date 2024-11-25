@@ -18,7 +18,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.6" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +27,11 @@
     <ProjectReference Include="..\TastyOrders.Services.Data\TastyOrders.Services.Data.csproj" />
     <ProjectReference Include="..\TastyOrders.Web.Infrastructure\TastyOrders.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\TastyOrders.Web.ViewModels\TastyOrders.Web.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Admin\Views\UserManagement\" />
   </ItemGroup>
 
 </Project>

@@ -4,10 +4,13 @@ using TastyOrders.Data.Models;
 using TastyOrders.Data;
 using TastyOrders.Web.ViewModels.Order;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TastyOrders.Web.Controllers
 {
     using static Common.EntityValidationConstants.Order;
+
+    [Authorize]
     public class OrderController : Controller
     {
         private readonly TastyOrdersDbContext context;  

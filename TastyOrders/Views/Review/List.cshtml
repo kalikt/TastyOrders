@@ -1,0 +1,20 @@
+﻿@using TastyOrders.Web.ViewModels.Review;
+@model IEnumerable<ReviewCreateViewModel>
+
+<h1>Reviews</h1>
+
+@if (!Model.Any())
+{
+    <p>No reviews yet. Be the first to leave a review!</p>
+}
+else
+{
+    <ul class="list-group">
+        @foreach (var review in Model)
+        {
+            <li class="list-group-item">
+                <strong>@review.Rating/5</strong> - @review.Comment
+            </li>
+        }
+    </ul>
+}

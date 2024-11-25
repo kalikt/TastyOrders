@@ -43,6 +43,8 @@ namespace TastyOrders.Common
 
         public static class Review 
         {
+            public const int RatingMinValue = 1;
+            public const int RatingMaxValue = 5;
             public const int CommentMinLength = 5;
             public const int CommentMaxLength = 300;
             public const string CreatedAtDateFormat = "yyyy-MM-dd HH:mm";

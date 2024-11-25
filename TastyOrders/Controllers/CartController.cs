@@ -4,9 +4,11 @@ using TastyOrders.Data.Models;
 using TastyOrders.Data;
 using Microsoft.EntityFrameworkCore;
 using TastyOrders.Web.ViewModels.Cart;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TastyOrders.Web.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         private readonly TastyOrdersDbContext context;
@@ -114,7 +116,7 @@ namespace TastyOrders.Web.Controllers
                 Quantity = i.Quantity
             }).ToList(),
             SelectedLocation = c.CartItems
-                .Select(ci => ci.MenuItem.Restaurant.Location)
+                .Select(ci => ci.MenuItem.Restaurant.Location) 
                 .FirstOrDefault() // All items should share the same location
         })
         .FirstOrDefaultAsync();
