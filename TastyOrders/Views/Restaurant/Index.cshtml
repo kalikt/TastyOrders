@@ -17,6 +17,7 @@
                         <h5 class="card-title">@restaurant.Name</h5>
                         <p class="card-text">@restaurant.Location</p>
                         <a href="@Url.Action("Menu", "Restaurant", new { id = restaurant.Id })" class="btn btn-primary">View Menu</a>
+                        <a asp-controller="Restaurant" asp-action="Details" asp-route-id="@restaurant.Id" class="btn btn-primary">View Reviews</a>
                     </div>
                 </div>
             </div>

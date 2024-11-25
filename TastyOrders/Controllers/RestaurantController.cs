@@ -2,9 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using TastyOrders.Data;
 using TastyOrders.Web.ViewModels.Restaurant;
+using TastyOrders.Web.ViewModels.Review;
 
 namespace TastyOrders.Web.Controllers
 {
+    using static Common.EntityValidationConstants.Review;
     public class RestaurantController : Controller
     {
         private readonly TastyOrdersDbContext context;
@@ -98,6 +100,37 @@ namespace TastyOrders.Web.Controllers
             }
 
             return View(restaurant);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var restaurant = await context.Restaurants
+                .Include(r => r.Reviews)
+                .ThenInclude(review => review.User)
+                .FirstOrDefaultAsync(r => r.Id == id);
+
+            if (restaurant == null)
+            {
+                return NotFound();
+            }
+
+            var model = new RestaurantDetailsViewModel
+            {
+                Id = restaurant.Id,
+                Name = restaurant.Name,
+                Location = restaurant.Location,
+                ImageUrl = restaurant.ImageUrl ?? string.Empty,
+                Reviews = restaurant.Reviews.Select(r => new ReviewViewModel
+                {
+                    Rating = r.Rating,
+                    Comment = r.Comment,
+                    UserName = r.User.UserName ?? string.Empty,
+                    CreatedAt = r.CreatedAt.ToString(CreatedAtDateFormat)
+                }).ToList()
+            };
+
+            return View(model);
         }
 
     }
