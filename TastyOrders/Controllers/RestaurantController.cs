@@ -2,27 +2,24 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TastyOrders.Data;
+using TastyOrders.Services.Data.Interfaces;
 using TastyOrders.Web.ViewModels.Restaurant;
 using TastyOrders.Web.ViewModels.Review;
 
 namespace TastyOrders.Web.Controllers
 {
-    using static Common.EntityValidationConstants.Review;
     public class RestaurantController : Controller
     {
-        private readonly TastyOrdersDbContext context;
+        private readonly IRestaurantService restaurantService;
 
-        public RestaurantController(TastyOrdersDbContext context)
+        public RestaurantController(IRestaurantService restaurantService)
         {
-            this.context = context;
+            this.restaurantService = restaurantService;
         }
 
-        public IActionResult ChooseLocation()
+        public async Task<IActionResult> ChooseLocation()
         {
-            var locations = context.Restaurants
-                .Select(r => r.Location)
-                .Distinct()
-                .ToList();
+            var locations = await restaurantService.GetDistinctLocationsAsync();
 
             var model = new LocationSelectionViewModel
             {
@@ -43,7 +40,6 @@ namespace TastyOrders.Web.Controllers
                 
             TempData["SelectedLocation"] = model.SelectedLocation;
 
-            // Redirect to the restaurants listing page with the selected location as a query parameter
             return RedirectToAction("Index", new { location = model.SelectedLocation });
         }
 
@@ -52,18 +48,10 @@ namespace TastyOrders.Web.Controllers
         {
             if (string.IsNullOrEmpty(location))
             {
-                return RedirectToAction("ChooseLocation");
+                return RedirectToAction(nameof(ChooseLocation));
             }
 
-            var restaurants = await context.Restaurants
-                .Where(r => r.Location == location)
-                .Select(r => new RestaurantIndexViewModel
-            {
-                Id = r.Id,
-                Name = r.Name,
-                Location = r.Location,
-                ImageUrl = r.ImageUrl ?? string.Empty
-            }).ToListAsync();
+            var restaurants = await restaurantService.GetRestaurantsByLocationAsync(location);
 
             var model = new RestaurantsWithLocationViewModel
             {
@@ -77,30 +65,12 @@ namespace TastyOrders.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            var restaurant = await context.Restaurants
-                .Include(r => r.Reviews)
-                .ThenInclude(review => review.User)
-                .FirstOrDefaultAsync(r => r.Id == id);
+            var model = await restaurantService.GetRestaurantDetailsAsync(id);
 
-            if (restaurant == null)
+            if (model == null)
             {
                 return NotFound();
             }
-
-            var model = new RestaurantDetailsViewModel
-            {
-                Id = restaurant.Id,
-                Name = restaurant.Name,
-                Location = restaurant.Location,
-                ImageUrl = restaurant.ImageUrl ?? string.Empty,
-                Reviews = restaurant.Reviews.Select(r => new ReviewViewModel
-                {
-                    Rating = r.Rating,
-                    Comment = r.Comment,
-                    UserName = r.User.UserName ?? string.Empty,
-                    CreatedAt = r.CreatedAt.ToString(CreatedAtDateFormat)
-                }).ToList()
-            };
 
             return View(model);
         }

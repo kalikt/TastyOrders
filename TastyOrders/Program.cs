@@ -6,6 +6,9 @@ namespace TastyOrders
 {
     using TastyOrders.Data.Configuration;
     using TastyOrders.Data.Models;
+    using TastyOrders.Services.Data.Interfaces;
+    using TastyOrders.Services.Data;
+
     public class Program
     {
         public static void Main(string[] args)
@@ -29,6 +32,9 @@ namespace TastyOrders
                 .AddDefaultTokenProviders();
             
             ;
+
+            builder.Services.AddScoped<IRestaurantService, RestaurantService>();
+
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
 
