@@ -4,19 +4,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TastyOrders.Data;
 using TastyOrders.Data.Models;
+using TastyOrders.Services.Data.Interfaces;
 using TastyOrders.Web.ViewModels.Review;
 
 namespace TastyOrders.Web.Controllers
 {
-    using static Common.EntityValidationConstants.Review;
     public class ReviewController : Controller
     {
-        private readonly TastyOrdersDbContext context;
+        private readonly IReviewService reviewService;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public ReviewController(TastyOrdersDbContext context, UserManager<ApplicationUser> userManager)
+        public ReviewController(IReviewService reviewService, UserManager<ApplicationUser> userManager)
         {
-            this.context = context;
+            this.reviewService = reviewService;
             this.userManager = userManager;
         }
 
@@ -24,17 +24,12 @@ namespace TastyOrders.Web.Controllers
         [Authorize]
         public async Task<IActionResult> Create(int restaurantId)
         {
-            var restaurant = await context.Restaurants.FindAsync(restaurantId);
-            if (restaurant == null)
+            var model = await reviewService.GetReviewCreateModelAsync(restaurantId);
+
+            if (model == null)
             {
                 return NotFound();
             }
-
-            var model = new ReviewCreateViewModel
-            {
-                RestaurantId = restaurant.Id,
-                RestaurantName = restaurant.Name
-            };
 
             return View(model);
         }
@@ -49,17 +44,12 @@ namespace TastyOrders.Web.Controllers
             }
 
             var user = await userManager.GetUserAsync(User);
-
-            var review = new Review
+            if (user == null)
             {
-                RestaurantId = model.RestaurantId,
-                UserId = user.Id,
-                Rating = model.Rating,
-                Comment = model.Comment
-            };
+                return Unauthorized();
+            }
 
-            context.Reviews.Add(review);
-            await context.SaveChangesAsync();
+            await reviewService.AddReviewAsync(model, user.Id);
 
             return RedirectToAction("Details", "Restaurant", new { id = model.RestaurantId });
         }
@@ -67,40 +57,20 @@ namespace TastyOrders.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> List(int restaurantId)
         {
-            var reviews = await context.Reviews
-                .Where(r => r.RestaurantId == restaurantId)
-                .Include(r => r.User)
-                .OrderByDescending(r => r.CreatedAt)
-                .Select(r => new ReviewCreateViewModel
-                {
-                    RestaurantName = r.Restaurant.Name,
-                    Rating = r.Rating,
-                    Comment = r.Comment
-                })
-                .ToListAsync();
-
+            var reviews = await reviewService.GetReviewsByRestaurantAsync(restaurantId);
             return View(reviews);
         }
 
         [HttpGet]
         public async Task<IActionResult> MyReviews()
         {
-            var userId = this.userManager.GetUserId(User)!;
+            var user = await userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
 
-            var reviews = await context.Reviews
-                .Where(r => r.UserId == userId)
-                .Include(r => r.Restaurant)
-                .OrderByDescending(r => r.CreatedAt)
-                .Select(r => new MyReviewsViewModel
-                {
-                    RestaurantName = r.Restaurant.Name,
-                    RestaurantId = r.Restaurant.Id,
-                    Rating = r.Rating,
-                    Comment = r.Comment,
-                    CreatedAt = r.CreatedAt.ToString(CreatedAtDateFormat)
-                })
-                .ToListAsync();
-
+            var reviews = await reviewService.GetUserReviewsAsync(user.Id);
             return View(reviews);
         }
     }
