@@ -23,6 +23,7 @@
             <th>Name</th>
             <th>Location</th>
             <th>Actions</th>
+            <th>Manage Menu</th>
         </tr>
     </thead>
     <tbody>
@@ -35,6 +36,12 @@
                     <form asp-action="RemoveRestaurant" asp-controller="RestaurantManagement" asp-area="Admin" method="post" class="d-inline">
                         <input type="hidden" name="restaurantId" value="@restaurant.Id" />
                         <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                    </form>
+                </td>
+                <td>
+                    <form asp-action="ManageMenuItems" asp-controller="MenuItemManagement" asp-area="Admin" method="get" class="d-inline">
+                        <input type="hidden" name="restaurantId" value="@restaurant.Id" />
+                        <button type="submit" class="btn btn-primary btn-sm">Manage Menu</button>
                     </form>
                 </td>
             </tr>
