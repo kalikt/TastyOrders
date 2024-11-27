@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TastyOrders.Data;
+using TastyOrders.Services.Data.Interfaces;
 
 namespace TastyOrders.Web.Areas.Admin.Controllers
 {
@@ -11,36 +12,30 @@ namespace TastyOrders.Web.Areas.Admin.Controllers
     [Authorize(Roles = AdminRoleName)]
     public class ReviewManagementController : Controller
     {
-        private readonly TastyOrdersDbContext context;
+        private readonly IReviewManagementService reviewService;
 
-        public ReviewManagementController(TastyOrdersDbContext context)
+        public ReviewManagementController(IReviewManagementService reviewService)
         {
-            this.context = context;
+            this.reviewService = reviewService;
         }
 
         [HttpGet]
         public async Task<IActionResult> ManageReviews()
         {
-            var reviews = await context.Reviews
-                .Include(r => r.Restaurant)
-                .Include(r => r.User)
-                .ToListAsync();
-
+            var reviews = await reviewService.GetAllReviewsAsync();
             return View(reviews);
         }
 
         [HttpPost]
         public async Task<IActionResult> DeleteReview(int reviewId)
         {
-            var review = await context.Reviews.FindAsync(reviewId);
-            if (review == null)
+            var success = await reviewService.DeleteReviewAsync(reviewId);
+
+            if (!success)
             {
                 TempData["ErrorMessage"] = "Review not found.";
                 return RedirectToAction(nameof(ManageReviews));
             }
-
-            context.Reviews.Remove(review);
-            await context.SaveChangesAsync();
 
             TempData["SuccessMessage"] = "Review deleted successfully.";
             return RedirectToAction(nameof(ManageReviews));
