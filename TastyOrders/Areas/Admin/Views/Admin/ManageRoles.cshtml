@@ -1,0 +1,88 @@
+﻿@model IEnumerable<TastyOrders.Web.ViewModels.Admin.UserRoleViewModel>
+
+@{
+    ViewData["Title"] = "Manage Roles & Users";
+}
+
+<h1>Manage Roles & Users</h1>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<h2>Manage Roles</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Roles</th>
+            <th>Assign New Role</th>
+            <th>Remove</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>
+                    @if (user.Roles.Any())
+                    {
+                        @string.Join(", ", user.Roles)
+                    }
+                    else
+                    {
+                        <em>No roles assigned</em>
+                    }
+                </td>
+                <td>
+                    <form asp-action="AssignRole" asp-controller="Admin" asp-area="Admin" method="post">
+                        <input type="hidden" name="userId" value="@user.UserId" />
+                        <select name="role" class="form-select">
+                            @foreach (var role in user.AllRoles)
+                            {
+                                <option value="@role">@role</option>
+                            }
+                        </select>
+                        <button type="submit" class="btn btn-primary btn-sm mt-2">Assign Role</button>
+                        @if (user.Roles.Any())
+                        {
+                            @foreach (var role in user.Roles)
+                            {
+                                <form asp-action="RemoveRole" asp-controller="Admin" asp-area="Admin" method="post" class="d-inline">
+                                    <input type="hidden" name="userId" value="@user.UserId" />
+                                    <input type="hidden" name="role" value="@role" />
+                                    <button type="submit" class="btn btn-danger btn-sm mt-2">Remove Role</button>
+                                </form>
+                            }
+                        }
+                    </form>
+                </td>
+                <td>
+                    <form asp-action="RemoveUser" asp-controller="Admin" asp-area="Admin" method="post" class="d-inline">
+                        <input type="hidden" name="userId" value="@user.UserId" />
+                        <button type="submit" class="btn btn-danger btn-sm">Remove user</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Add a New User</h2>
+<form asp-action="AddUser" asp-controller="Admin" asp-area="Admin" method="post">
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Add User</button>
+</form>

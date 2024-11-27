@@ -29,9 +29,4 @@
     <ProjectReference Include="..\TastyOrders.Web.ViewModels\TastyOrders.Web.ViewModels.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Areas\Admin\Views\UserManagement\" />
-  </ItemGroup>
-
 </Project>
