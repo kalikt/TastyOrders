@@ -1,0 +1,46 @@
+﻿@using TastyOrders.Data.Models;
+@model IEnumerable<Restaurant>
+
+@{
+    ViewData["Title"] = "Manage Restaurants";
+}
+
+<h1>Manage Restaurants</h1>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<h2>Existing Restaurants</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var restaurant in Model)
+        {
+            <tr>
+                <td>@restaurant.Name</td>
+                <td>@restaurant.Location</td>
+                <td>
+                    <form asp-action="RemoveRestaurant" asp-controller="RestaurantManagement" asp-area="Admin" method="post" class="d-inline">
+                        <input type="hidden" name="restaurantId" value="@restaurant.Id" />
+                        <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Add a New Restaurant</h2>
+<a asp-action="AddRestaurant" asp-controller="RestaurantManagement" asp-area="Admin" class="btn btn-primary">Add New Restaurant</a>
