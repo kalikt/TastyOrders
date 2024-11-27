@@ -37,6 +37,7 @@ namespace TastyOrders
             builder.Services.AddScoped<IReviewService, ReviewService>();
             builder.Services.AddScoped<IAdminService, AdminService>();
             builder.Services.AddScoped<IRestaurantManagementService, RestaurantManagementService>();
+            builder.Services.AddScoped<IMenuItemManagementService, MenuItemManagementService>();
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
