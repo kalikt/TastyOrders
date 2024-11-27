@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TastyOrders.Data;
 using TastyOrders.Data.Models;
+using TastyOrders.Services.Data.Interfaces;
 
 namespace TastyOrders.Web.Areas.Admin.Controllers
 {
@@ -12,17 +13,17 @@ namespace TastyOrders.Web.Areas.Admin.Controllers
     [Authorize(Roles = AdminRoleName)]
     public class RestaurantManagementController : Controller
     {
-        private readonly TastyOrdersDbContext context;
-
-        public RestaurantManagementController(TastyOrdersDbContext context)
+        private readonly IRestaurantManagementService restaurantService;
+        public RestaurantManagementController(IRestaurantManagementService restaurantService)
         {
-            this.context = context;
+            this.restaurantService = restaurantService;
         }
+
 
         [HttpGet]
         public async Task<IActionResult> ManageRestaurants()
         {
-            var restaurants = await context.Restaurants.ToListAsync();
+            var restaurants = await restaurantService.GetAllRestaurantsAsync();
             return View(restaurants);
         }
 
@@ -35,21 +36,13 @@ namespace TastyOrders.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> AddRestaurant(string name, string location, string imageUrl)
         {
-            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(location))
+            var success = await restaurantService.AddRestaurantAsync(name, location, imageUrl);
+
+            if (!success)
             {
                 TempData["ErrorMessage"] = "Name and location are required.";
                 return RedirectToAction(nameof(ManageRestaurants));
             }
-
-            var restaurant = new Restaurant
-            {
-                Name = name,
-                Location = location,
-                ImageUrl = imageUrl
-            };
-
-            context.Restaurants.Add(restaurant);
-            await context.SaveChangesAsync();
 
             TempData["SuccessMessage"] = $"Restaurant '{name}' has been added successfully.";
             return RedirectToAction(nameof(ManageRestaurants));
@@ -58,17 +51,15 @@ namespace TastyOrders.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> RemoveRestaurant(int restaurantId)
         {
-            var restaurant = await context.Restaurants.FindAsync(restaurantId);
-            if (restaurant == null)
+            var success = await restaurantService.RemoveRestaurantAsync(restaurantId);
+
+            if (!success)
             {
                 TempData["ErrorMessage"] = "Restaurant not found.";
                 return RedirectToAction(nameof(ManageRestaurants));
             }
 
-            context.Restaurants.Remove(restaurant);
-            await context.SaveChangesAsync();
-
-            TempData["SuccessMessage"] = $"Restaurant '{restaurant.Name}' has been removed successfully.";
+            TempData["SuccessMessage"] = "Restaurant has been removed successfully.";
             return RedirectToAction(nameof(ManageRestaurants));
         }
     }
