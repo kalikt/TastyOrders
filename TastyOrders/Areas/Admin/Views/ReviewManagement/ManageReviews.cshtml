@@ -1,0 +1,46 @@
+﻿@using TastyOrders.Data.Models;
+@model IEnumerable<Review>
+
+@{
+    ViewData["Title"] = "Manage Reviews";
+}
+
+<h1>Manage User Reviews</h1>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Restaurant</th>
+            <th>User</th>
+            <th>Rating</th>
+            <th>Comment</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var review in Model)
+        {
+            <tr>
+                <td>@review.Restaurant.Name</td>
+                <td>@review.User.UserName</td>
+                <td>@review.Rating/5</td>
+                <td>@review.Comment</td>
+                <td>
+                    <form asp-action="DeleteReview" asp-controller="ReviewManagement" asp-area="Admin" method="post" class="d-inline">
+                        <input type="hidden" name="reviewId" value="@review.Id" />
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
