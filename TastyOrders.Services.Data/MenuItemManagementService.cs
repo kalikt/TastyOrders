@@ -2,6 +2,7 @@
 using TastyOrders.Data;
 using TastyOrders.Data.Models;
 using TastyOrders.Services.Data.Interfaces;
+using TastyOrders.Web.ViewModels.MenuItem;
 
 namespace TastyOrders.Services.Data
 {
@@ -57,19 +58,38 @@ namespace TastyOrders.Services.Data
             return restaurantId;
         }
 
-        public async Task<MenuItem?> GetMenuItemByIdAsync(int menuItemId)
+        public async Task<EditMenuItemViewModel?> GetMenuItemByIdAsync(int menuItemId)
         {
-            return await context.MenuItems
-                .Include(m => m.Restaurant)
-                .FirstOrDefaultAsync(m => m.Id == menuItemId);
+            var menuItem = await context.MenuItems
+        .Include(m => m.Restaurant)
+        .FirstOrDefaultAsync(m => m.Id == menuItemId);
+
+            if (menuItem == null) return null;
+
+            return new EditMenuItemViewModel
+            {
+                Id = menuItem.Id,
+                Name = menuItem.Name,
+                Price = menuItem.Price,
+                Description = menuItem.Description,
+                ImageUrl = menuItem.ImageUrl ?? string.Empty,
+                RestaurantId = menuItem.RestaurantId
+            };
         }
 
-        public async Task<bool> UpdateMenuItemAsync(MenuItem updatedMenuItem)
+        public async Task<bool> UpdateMenuItemAsync(EditMenuItemViewModel updatedMenuItem)
         {
+            if (string.IsNullOrWhiteSpace(updatedMenuItem.Name) ||
+               updatedMenuItem.Price <= 0 ||
+               string.IsNullOrWhiteSpace(updatedMenuItem.Description))
+            {
+                return false; 
+            }
+
             var menuItem = await context.MenuItems.FindAsync(updatedMenuItem.Id);
             if (menuItem == null)
             {
-                return false;
+                return false; 
             }
 
             menuItem.Name = updatedMenuItem.Name;

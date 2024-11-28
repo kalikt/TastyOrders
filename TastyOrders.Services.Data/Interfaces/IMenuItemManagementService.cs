@@ -1,4 +1,5 @@
 ﻿using TastyOrders.Data.Models;
+using TastyOrders.Web.ViewModels.MenuItem;
 
 namespace TastyOrders.Services.Data.Interfaces
 {
@@ -7,7 +8,7 @@ namespace TastyOrders.Services.Data.Interfaces
         Task<Restaurant?> GetRestaurantWithMenuItemsAsync(int restaurantId);
         Task<bool> AddMenuItemAsync(int restaurantId, string name, decimal price, string description, string? imageUrl);
         Task<int?> RemoveMenuItemAsync(int menuItemId);
-        Task<MenuItem?> GetMenuItemByIdAsync(int menuItemId);
-        Task<bool> UpdateMenuItemAsync(MenuItem updatedMenuItem);
+        Task<EditMenuItemViewModel?> GetMenuItemByIdAsync(int menuItemId);
+        Task<bool> UpdateMenuItemAsync(EditMenuItemViewModel updatedMenuItem);
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TastyOrders.Data.Models;
 using TastyOrders.Services.Data.Interfaces;
+using TastyOrders.Web.ViewModels.MenuItem;
 
 namespace TastyOrders.Web.Areas.Admin.Controllers
 {
@@ -74,27 +75,32 @@ namespace TastyOrders.Web.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> EditMenuItem(int menuItemId)
         {
-            var menuItem = await menuItemService.GetMenuItemByIdAsync(menuItemId);
+            var model = await menuItemService.GetMenuItemByIdAsync(menuItemId);
 
-            if (menuItem == null)
+            if (model == null)
             {
                 TempData["ErrorMessage"] = "Menu item not found.";
-                return RedirectToAction("ManageRestaurants", "RestaurantManagement", new { area = "Admin" });
+                return RedirectToAction("ManageRestaurants", "RestaurantManagement", new { area = AdminRoleName });
             }
 
-            ViewBag.RestaurantName = menuItem.Restaurant.Name;
-            return View(menuItem);
+            ViewBag.RestaurantName = (await menuItemService.GetRestaurantWithMenuItemsAsync(model.RestaurantId))?.Name;
+            return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditMenuItem(MenuItem updatedMenuItem)
+        public async Task<IActionResult> EditMenuItem(EditMenuItemViewModel updatedMenuItem)
         {
-            var success = await menuItemService.UpdateMenuItemAsync(updatedMenuItem);
+            if (!ModelState.IsValid)
+            {
+                ViewBag.RestaurantName = (await menuItemService.GetRestaurantWithMenuItemsAsync(updatedMenuItem.RestaurantId))?.Name;
+                return View(updatedMenuItem);
+            }
 
+            var success = await menuItemService.UpdateMenuItemAsync(updatedMenuItem);
             if (!success)
             {
-                TempData["ErrorMessage"] = "Menu item not found.";
-                return RedirectToAction("ManageRestaurants", "RestaurantManagement", new { area = "Admin" });
+                TempData["ErrorMessage"] = "Failed to update the menu item. Please try again.";
+                return RedirectToAction("ManageMenuItems", new { restaurantId = updatedMenuItem.RestaurantId });
             }
 
             TempData["SuccessMessage"] = "Menu item updated successfully.";
