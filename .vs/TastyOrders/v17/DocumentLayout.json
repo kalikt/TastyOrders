@@ -3,32 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\kalik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0438\\GitHub\\TastyOrders\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D96EB465-BC06-4B1D-ABBA-897366A51ED3}|TastyOrders.Web.ViewModels\\TastyOrders.Web.ViewModels.csproj|c:\\users\\kalik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0438\\github\\tastyorders\\tastyorders.web.viewmodels\\review\\reviewviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D96EB465-BC06-4B1D-ABBA-897366A51ED3}|TastyOrders.Web.ViewModels\\TastyOrders.Web.ViewModels.csproj|solutionrelative:tastyorders.web.viewmodels\\review\\reviewviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE35CE97-3913-47AA-8239-2F2D07ECF8C6}|TastyOrders\\TastyOrders.Web.csproj|c:\\users\\kalik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0438\\github\\tastyorders\\tastyorders\\areas\\admin\\views\\reviewmanagement\\managereviews.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EE35CE97-3913-47AA-8239-2F2D07ECF8C6}|TastyOrders\\TastyOrders.Web.csproj|solutionrelative:tastyorders\\areas\\admin\\views\\reviewmanagement\\managereviews.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B53B9DE6-60DB-4664-B0A1-CE8CCE4E1B4B}|TastyOrders.Services.Data\\TastyOrders.Services.Data.csproj|c:\\users\\kalik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0438\\github\\tastyorders\\tastyorders.services.data\\restaurantservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B53B9DE6-60DB-4664-B0A1-CE8CCE4E1B4B}|TastyOrders.Services.Data\\TastyOrders.Services.Data.csproj|solutionrelative:tastyorders.services.data\\restaurantservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B53B9DE6-60DB-4664-B0A1-CE8CCE4E1B4B}|TastyOrders.Services.Data\\TastyOrders.Services.Data.csproj|c:\\users\\kalik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0438\\github\\tastyorders\\tastyorders.services.data\\interfaces\\ireviewmanagementservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B53B9DE6-60DB-4664-B0A1-CE8CCE4E1B4B}|TastyOrders.Services.Data\\TastyOrders.Services.Data.csproj|solutionrelative:tastyorders.services.data\\interfaces\\ireviewmanagementservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D96EB465-BC06-4B1D-ABBA-897366A51ED3}|TastyOrders.Web.ViewModels\\TastyOrders.Web.ViewModels.csproj|c:\\users\\kalik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0438\\github\\tastyorders\\tastyorders.web.viewmodels\\review\\managereviewsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D96EB465-BC06-4B1D-ABBA-897366A51ED3}|TastyOrders.Web.ViewModels\\TastyOrders.Web.ViewModels.csproj|solutionrelative:tastyorders.web.viewmodels\\review\\managereviewsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B53B9DE6-60DB-4664-B0A1-CE8CCE4E1B4B}|TastyOrders.Services.Data\\TastyOrders.Services.Data.csproj|c:\\users\\kalik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0438\\github\\tastyorders\\tastyorders.services.data\\reviewmanagementservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B53B9DE6-60DB-4664-B0A1-CE8CCE4E1B4B}|TastyOrders.Services.Data\\TastyOrders.Services.Data.csproj|solutionrelative:tastyorders.services.data\\reviewmanagementservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE35CE97-3913-47AA-8239-2F2D07ECF8C6}|TastyOrders\\TastyOrders.Web.csproj|c:\\users\\kalik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0438\\github\\tastyorders\\tastyorders\\areas\\admin\\controllers\\reviewmanagementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE35CE97-3913-47AA-8239-2F2D07ECF8C6}|TastyOrders\\TastyOrders.Web.csproj|solutionrelative:tastyorders\\areas\\admin\\controllers\\reviewmanagementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EE35CE97-3913-47AA-8239-2F2D07ECF8C6}|TastyOrders\\TastyOrders.Web.csproj|c:\\users\\kalik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0438\\github\\tastyorders\\tastyorders\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE35CE97-3913-47AA-8239-2F2D07ECF8C6}|TastyOrders\\TastyOrders.Web.csproj|solutionrelative:tastyorders\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -47,87 +23,15 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ReviewViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\kalik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0438\\GitHub\\TastyOrders\\TastyOrders.Web.ViewModels\\Review\\ReviewViewModel.cs",
-              "RelativeDocumentMoniker": "TastyOrders.Web.ViewModels\\Review\\ReviewViewModel.cs",
-              "ToolTip": "C:\\Users\\kalik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0438\\GitHub\\TastyOrders\\TastyOrders.Web.ViewModels\\Review\\ReviewViewModel.cs",
-              "RelativeToolTip": "TastyOrders.Web.ViewModels\\Review\\ReviewViewModel.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\kalik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0438\\GitHub\\TastyOrders\\TastyOrders\\Program.cs",
+              "RelativeDocumentMoniker": "TastyOrders\\Program.cs",
+              "ToolTip": "C:\\Users\\kalik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0438\\GitHub\\TastyOrders\\TastyOrders\\Program.cs",
+              "RelativeToolTip": "TastyOrders\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-28T15:49:14.928Z",
+              "WhenOpened": "2024-11-28T19:40:52.503Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "RestaurantService.cs",
-              "DocumentMoniker": "C:\\Users\\kalik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0438\\GitHub\\TastyOrders\\TastyOrders.Services.Data\\RestaurantService.cs",
-              "RelativeDocumentMoniker": "TastyOrders.Services.Data\\RestaurantService.cs",
-              "ToolTip": "C:\\Users\\kalik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0438\\GitHub\\TastyOrders\\TastyOrders.Services.Data\\RestaurantService.cs",
-              "RelativeToolTip": "TastyOrders.Services.Data\\RestaurantService.cs",
-              "ViewState": "AgIAAC4AAAAAAAAAAAAkwDkAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-28T15:42:44.203Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "IReviewManagementService.cs",
-              "DocumentMoniker": "C:\\Users\\kalik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0438\\GitHub\\TastyOrders\\TastyOrders.Services.Data\\Interfaces\\IReviewManagementService.cs",
-              "RelativeDocumentMoniker": "TastyOrders.Services.Data\\Interfaces\\IReviewManagementService.cs",
-              "ToolTip": "C:\\Users\\kalik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0438\\GitHub\\TastyOrders\\TastyOrders.Services.Data\\Interfaces\\IReviewManagementService.cs",
-              "RelativeToolTip": "TastyOrders.Services.Data\\Interfaces\\IReviewManagementService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-28T15:41:19.903Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ManageReviewsViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\kalik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0438\\GitHub\\TastyOrders\\TastyOrders.Web.ViewModels\\Review\\ManageReviewsViewModel.cs",
-              "RelativeDocumentMoniker": "TastyOrders.Web.ViewModels\\Review\\ManageReviewsViewModel.cs",
-              "ToolTip": "C:\\Users\\kalik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0438\\GitHub\\TastyOrders\\TastyOrders.Web.ViewModels\\Review\\ManageReviewsViewModel.cs",
-              "RelativeToolTip": "TastyOrders.Web.ViewModels\\Review\\ManageReviewsViewModel.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAswA4AAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-28T15:36:07.654Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ReviewManagementService.cs",
-              "DocumentMoniker": "C:\\Users\\kalik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0438\\GitHub\\TastyOrders\\TastyOrders.Services.Data\\ReviewManagementService.cs",
-              "RelativeDocumentMoniker": "TastyOrders.Services.Data\\ReviewManagementService.cs",
-              "ToolTip": "C:\\Users\\kalik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0438\\GitHub\\TastyOrders\\TastyOrders.Services.Data\\ReviewManagementService.cs",
-              "RelativeToolTip": "TastyOrders.Services.Data\\ReviewManagementService.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAswBsAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-28T15:34:40.871Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ReviewManagementController.cs",
-              "DocumentMoniker": "C:\\Users\\kalik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0438\\GitHub\\TastyOrders\\TastyOrders\\Areas\\Admin\\Controllers\\ReviewManagementController.cs",
-              "RelativeDocumentMoniker": "TastyOrders\\Areas\\Admin\\Controllers\\ReviewManagementController.cs",
-              "ToolTip": "C:\\Users\\kalik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0438\\GitHub\\TastyOrders\\TastyOrders\\Areas\\Admin\\Controllers\\ReviewManagementController.cs",
-              "RelativeToolTip": "TastyOrders\\Areas\\Admin\\Controllers\\ReviewManagementController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-28T15:34:17.705Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ManageReviews.cshtml",
-              "DocumentMoniker": "C:\\Users\\kalik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0438\\GitHub\\TastyOrders\\TastyOrders\\Areas\\Admin\\Views\\ReviewManagement\\ManageReviews.cshtml",
-              "RelativeDocumentMoniker": "TastyOrders\\Areas\\Admin\\Views\\ReviewManagement\\ManageReviews.cshtml",
-              "ToolTip": "C:\\Users\\kalik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0438\\GitHub\\TastyOrders\\TastyOrders\\Areas\\Admin\\Views\\ReviewManagement\\ManageReviews.cshtml",
-              "RelativeToolTip": "TastyOrders\\Areas\\Admin\\Views\\ReviewManagement\\ManageReviews.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-28T15:32:59.297Z"
             }
           ]
         }
