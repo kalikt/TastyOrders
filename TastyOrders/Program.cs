@@ -7,8 +7,7 @@ namespace TastyOrders
     using TastyOrders.Data.Configuration;
     using TastyOrders.Data.Models;
     using TastyOrders.Services.Data.Interfaces;
-    using TastyOrders.Services.Data;
-    using Microsoft.AspNetCore.Identity.UI.Services;
+    using TastyOrders.Web.Infrastructure.Extensions;
 
     public class Program
     {
@@ -29,17 +28,7 @@ namespace TastyOrders
                 .AddEntityFrameworkStores<TastyOrdersDbContext>()
                 .AddDefaultTokenProviders();
 
-
-            builder.Services.AddScoped<IRestaurantService, RestaurantService>();
-            builder.Services.AddScoped<ICartService, CartService>();
-            builder.Services.AddScoped<IMenuService, MenuService>();
-            builder.Services.AddScoped<IOrderService, OrderService>();
-            builder.Services.AddScoped<IReviewService, ReviewService>();
-            builder.Services.AddScoped<IAdminService, AdminService>();
-            builder.Services.AddScoped<IRestaurantManagementService, RestaurantManagementService>();
-            builder.Services.AddScoped<IMenuItemManagementService, MenuItemManagementService>();
-            builder.Services.AddScoped<IReviewManagementService, ReviewManagementService>();
-
+            builder.Services.RegisterUserDefinedServices(typeof(IAdminService).Assembly);
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
@@ -82,8 +71,6 @@ namespace TastyOrders
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.MapRazorPages();
-
-            //app.ApplyMigrations();
 
             app.Run();
         }
