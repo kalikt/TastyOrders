@@ -13,6 +13,7 @@ namespace TastyOrders.Web.ViewModels.Restaurant
         public string Name { get; set; } = null!;
         public string Location { get; set; } = null!;
         public string ImageUrl { get; set; } = null!;
-        public List<ReviewViewModel> Reviews { get; set; } = new List<ReviewViewModel>();
+        public List<ReviewViewModel> Reviews { get; set; } 
+            = new List<ReviewViewModel>();
     }
 }

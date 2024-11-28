@@ -2,6 +2,7 @@
 using TastyOrders.Data;
 using TastyOrders.Data.Models;
 using TastyOrders.Services.Data.Interfaces;
+using TastyOrders.Web.ViewModels.Review;
 
 namespace TastyOrders.Services.Data
 {
@@ -14,11 +15,19 @@ namespace TastyOrders.Services.Data
             this.context = context;
         }
 
-        public async Task<List<Review>> GetAllReviewsAsync()
+        public async Task<List<ReviewIndexViewModel>> GetAllReviewsAsync()
         {
             return await context.Reviews
                 .Include(r => r.Restaurant)
                 .Include(r => r.User)
+                .Select(r => new ReviewIndexViewModel
+                {
+                    Id = r.Id,
+                    RestaurantName = r.Restaurant.Name,
+                    UserName = r.User.UserName ?? string.Empty,
+                    Rating = r.Rating,
+                    Comment = r.Comment
+                })
                 .ToListAsync();
         }
 

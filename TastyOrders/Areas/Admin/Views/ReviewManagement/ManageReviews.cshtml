@@ -1,5 +1,5 @@
-﻿@using TastyOrders.Data.Models;
-@model IEnumerable<Review>
+﻿@using TastyOrders.Web.ViewModels.Review;
+@model ManageReviewsViewModel
 
 @{
     ViewData["Title"] = "Manage Reviews";
@@ -27,12 +27,12 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var review in Model)
+        @foreach (var review in Model.Reviews)
         {
             <tr>
-                <td>@review.Restaurant.Name</td>
-                <td>@review.User.UserName</td>
-                <td>@review.Rating/5</td>
+                <td>@review.RestaurantName</td>
+                <td>@review.UserName</td>
+                <td>@review.Rating / 5</td>
                 <td>@review.Comment</td>
                 <td>
                     <form asp-action="DeleteReview" asp-controller="ReviewManagement" asp-area="Admin" method="post" class="d-inline">

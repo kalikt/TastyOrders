@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TastyOrders.Data;
 using TastyOrders.Services.Data.Interfaces;
+using TastyOrders.Web.ViewModels.Review;
 
 namespace TastyOrders.Web.Areas.Admin.Controllers
 {
@@ -23,7 +24,12 @@ namespace TastyOrders.Web.Areas.Admin.Controllers
         public async Task<IActionResult> ManageReviews()
         {
             var reviews = await reviewService.GetAllReviewsAsync();
-            return View(reviews);
+            var model = new ManageReviewsViewModel
+            {
+                Reviews = reviews
+            };
+
+            return View(model);
         }
 
         [HttpPost]
