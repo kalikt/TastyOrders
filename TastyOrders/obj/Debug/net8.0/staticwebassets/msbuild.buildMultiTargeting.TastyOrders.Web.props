@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\TastyOrders.Web.props" />
-</Project>
