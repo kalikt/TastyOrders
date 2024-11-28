@@ -22,17 +22,15 @@ namespace TastyOrders.Web.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> ManageMenuItems(int restaurantId)
         {
-            var restaurant = await menuItemService.GetRestaurantWithMenuItemsAsync(restaurantId);
-            if (restaurant == null)
+            var model = await menuItemService.GetManageMenuItemsViewModelAsync(restaurantId);
+
+            if (model == null)
             {
                 TempData["ErrorMessage"] = "Restaurant not found.";
                 return RedirectToAction("ManageRestaurants", "RestaurantManagement", new { area = AdminRoleName });
             }
 
-            ViewBag.RestaurantName = restaurant.Name;
-            ViewBag.RestaurantId = restaurant.Id;
-
-            return View(restaurant.MenuItems);
+            return View(model);
         }
 
         [HttpGet]

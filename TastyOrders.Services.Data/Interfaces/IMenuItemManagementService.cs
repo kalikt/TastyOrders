@@ -10,5 +10,7 @@ namespace TastyOrders.Services.Data.Interfaces
         Task<int?> RemoveMenuItemAsync(int menuItemId);
         Task<EditMenuItemViewModel?> GetMenuItemByIdAsync(int menuItemId);
         Task<bool> UpdateMenuItemAsync(EditMenuItemViewModel updatedMenuItem);
+
+        public Task<ManageMenuItemsViewModel?> GetManageMenuItemsViewModelAsync(int restaurantId);
     }
 }

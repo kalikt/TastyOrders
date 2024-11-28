@@ -1,11 +1,11 @@
-﻿@using TastyOrders.Data.Models;
-@model IEnumerable<MenuItem>
+﻿@using TastyOrders.Web.ViewModels.MenuItem;
+@model ManageMenuItemsViewModel
 
 @{
     ViewData["Title"] = "Manage Menu Items";
 }
 
-<h1>Manage Menu Items for @ViewBag.RestaurantName</h1>
+<h1>Manage Menu Items for @Model.RestaurantName</h1>
 
 @if (TempData["SuccessMessage"] != null)
 {
@@ -26,7 +26,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var menuItem in Model)
+        @foreach (var menuItem in Model.MenuItems)
         {
             <tr>
                 <td>@menuItem.Name</td>
@@ -47,5 +47,5 @@
     </tbody>
 </table>
 
-<a asp-action="AddMenuItem" asp-controller="MenuItemManagement" asp-area="Admin" asp-route-restaurantId="@ViewBag.RestaurantId" class="btn btn-primary mt-3">Add New Menu Item</a>
+<a asp-action="AddMenuItem" asp-controller="MenuItemManagement" asp-area="Admin" asp-route-restaurantId="@Model.RestaurantId" class="btn btn-primary mt-3">Add New Menu Item</a>
 <a asp-action="ManageRestaurants" asp-controller="RestaurantManagement" asp-area="Admin" class="btn btn-secondary mt-3">Back to Manage Restaurants</a>

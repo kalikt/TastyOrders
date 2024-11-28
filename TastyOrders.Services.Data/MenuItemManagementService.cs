@@ -100,5 +100,27 @@ namespace TastyOrders.Services.Data
             await context.SaveChangesAsync();
             return true;
         }
+
+        public async Task<ManageMenuItemsViewModel?> GetManageMenuItemsViewModelAsync(int restaurantId)
+        {
+            var restaurant = await context.Restaurants
+                .Include(r => r.MenuItems)
+                .FirstOrDefaultAsync(r => r.Id == restaurantId);
+
+            if (restaurant == null) return null;
+
+            return new ManageMenuItemsViewModel
+            {
+                RestaurantId = restaurant.Id,
+                RestaurantName = restaurant.Name,
+                MenuItems = restaurant.MenuItems.Select(menuItem => new MenuItemViewModel
+                {
+                    Id = menuItem.Id,
+                    Name = menuItem.Name,
+                    Price = menuItem.Price,
+                    Description = menuItem.Description
+                })
+            };
+        }
     }
 }
