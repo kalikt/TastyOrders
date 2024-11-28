@@ -1,5 +1,5 @@
-﻿@using TastyOrders.Data.Models;
-@model IEnumerable<Restaurant>
+﻿@using TastyOrders.Web.ViewModels.Restaurant;
+@model ManageRestaurantsViewModel
 
 @{
     ViewData["Title"] = "Manage Restaurants";
@@ -27,7 +27,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var restaurant in Model)
+        @foreach (var restaurant in Model.Restaurants)
         {
             <tr>
                 <td>@restaurant.Name</td>

@@ -2,6 +2,7 @@
 using TastyOrders.Data;
 using TastyOrders.Data.Models;
 using TastyOrders.Services.Data.Interfaces;
+using TastyOrders.Web.ViewModels.Restaurant;
 
 namespace TastyOrders.Services.Data
 {
@@ -14,9 +15,17 @@ namespace TastyOrders.Services.Data
             this.context = context;
         }
 
-        public async Task<List<Restaurant>> GetAllRestaurantsAsync()
+        public async Task<List<RestaurantViewModel>> GetAllRestaurantsAsync()
         {
-            return await context.Restaurants.ToListAsync();
+            return await context.Restaurants
+                 .Select(r => new RestaurantViewModel
+                 {
+                     Id = r.Id,
+                     Name = r.Name,
+                     Location = r.Location,
+                     ImageUrl = r.ImageUrl
+                 })
+                 .ToListAsync();
         }
 
         public async Task<bool> AddRestaurantAsync(string name, string location, string? imageUrl)

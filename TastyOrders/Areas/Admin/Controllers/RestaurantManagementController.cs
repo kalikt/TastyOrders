@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using TastyOrders.Data;
 using TastyOrders.Data.Models;
 using TastyOrders.Services.Data.Interfaces;
+using TastyOrders.Web.ViewModels.Restaurant;
 
 namespace TastyOrders.Web.Areas.Admin.Controllers
 {
@@ -24,7 +25,12 @@ namespace TastyOrders.Web.Areas.Admin.Controllers
         public async Task<IActionResult> ManageRestaurants()
         {
             var restaurants = await restaurantService.GetAllRestaurantsAsync();
-            return View(restaurants);
+            var model = new ManageRestaurantsViewModel
+            {
+                Restaurants = restaurants
+            };
+
+            return View(model);
         }
 
         [HttpGet]
