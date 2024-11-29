@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TastyOrders.Data.Models;
 
 namespace TastyOrders.Data.Configuration
@@ -17,13 +12,16 @@ namespace TastyOrders.Data.Configuration
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-            // Seed Admin Role
-            if (!await roleManager.RoleExistsAsync(AdminRoleName))
+            var roles = new[] { "Admin", "User" };
+
+            foreach (var role in roles)
             {
-                await roleManager.CreateAsync(new IdentityRole(AdminRoleName));
+                if (!await roleManager.RoleExistsAsync(role))
+                {
+                    await roleManager.CreateAsync(new IdentityRole(role));
+                }
             }
 
-            // Seed Admin User
             var adminEmail = AdminEmail;
             var adminUser = await userManager.FindByEmailAsync(adminEmail);
             if (adminUser == null)

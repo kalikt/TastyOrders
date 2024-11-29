@@ -58,7 +58,7 @@ namespace TastyOrders
 
             using (var scope = app.Services.CreateScope())
             {
-                var services = scope.ServiceProvider;
+                var services = scope.ServiceProvider;   
                 RoleInitializer.SeedRolesAndAdminAsync(services).GetAwaiter().GetResult();
             }
 
