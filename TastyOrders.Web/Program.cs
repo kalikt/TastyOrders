@@ -56,6 +56,8 @@ namespace TastyOrders
 
             app.UseAuthorization();
 
+            app.UseStatusCodePagesWithRedirects("/Home/Error/{0}");
+
             using (var scope = app.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;   
@@ -65,6 +67,10 @@ namespace TastyOrders
             app.MapControllerRoute(
             name: "Areas",
             pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+            app.MapControllerRoute(
+                name: "Errors",
+                pattern: "{controller=Home}/{action=Index}/{statusCode?}");
 
             app.MapControllerRoute(
                 name: "default",
