@@ -23,10 +23,19 @@ namespace TastyOrders.Services.Data
                 .ToListAsync();
         }
 
-        public async Task<List<RestaurantIndexViewModel>> GetRestaurantsByLocationAsync(string location)
+        public async Task<List<RestaurantIndexViewModel>> GetRestaurantsByLocationAsync(string location, string? search)
         {
-            return await context.Restaurants
+            var query = context.Restaurants
                 .Where(r => r.Location == location)
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                string searchLower = search.ToLower();
+                query = query.Where(r => r.Name.ToLower().Contains(searchLower));
+            }
+
+            return await query
                 .Select(r => new RestaurantIndexViewModel
                 {
                     Id = r.Id,

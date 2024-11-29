@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using TastyOrders.Data;
+﻿using Microsoft.AspNetCore.Mvc;
 using TastyOrders.Services.Data.Interfaces;
 using TastyOrders.Web.ViewModels.Restaurant;
-using TastyOrders.Web.ViewModels.Review;
 
 namespace TastyOrders.Web.Controllers
 {
@@ -44,20 +40,22 @@ namespace TastyOrders.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(string location)
+        public async Task<IActionResult> Index(string location, string? search)
         {
             if (string.IsNullOrEmpty(location))
             {
                 return RedirectToAction(nameof(ChooseLocation));
             }
 
-            var restaurants = await restaurantService.GetRestaurantsByLocationAsync(location);
+            var restaurants = await restaurantService.GetRestaurantsByLocationAsync(location, search);
 
             var model = new RestaurantsWithLocationViewModel
             {
                 SelectedLocation = location,
                 Restaurants = restaurants
             };
+
+            ViewData["SearchQuery"] = search; 
 
             return View(model);
         }
