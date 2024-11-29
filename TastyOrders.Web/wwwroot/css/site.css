@@ -20,3 +20,42 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.header-with-bg {
+    background: url('/images/background.jpg') no-repeat center center;
+    background-size: cover; 
+    min-height: 60vh; 
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    color: white; 
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); 
+}
+
+.header-with-bg {
+    position: relative;
+    background: url('/images/background.jpg') no-repeat center center;
+    background-size: cover;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+    .header-with-bg::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); 
+        z-index: 1;
+    }
+
+    .header-with-bg .container {
+        position: relative;
+        z-index: 2; 
+    }
