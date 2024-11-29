@@ -42,7 +42,7 @@ namespace TastyOrders.Services.Data
 
             if (cart == null || !cart.CartItems.Any())
             {
-                return false; // No cart or empty cart
+                return false;
             }
 
             var order = new Order
@@ -59,7 +59,7 @@ namespace TastyOrders.Services.Data
             };
 
             context.Orders.Add(order);
-            context.CartItems.RemoveRange(cart.CartItems); // Clear the cart
+            context.CartItems.RemoveRange(cart.CartItems); 
             await context.SaveChangesAsync();
 
             return true;

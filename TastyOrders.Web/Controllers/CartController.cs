@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TastyOrders.Data.Models;
-using TastyOrders.Data;
-using Microsoft.EntityFrameworkCore;
-using TastyOrders.Web.ViewModels.Cart;
 using Microsoft.AspNetCore.Authorization;
 using TastyOrders.Services.Data.Interfaces;
 

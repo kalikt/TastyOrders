@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using TastyOrders.Data;
 using TastyOrders.Data.Models;
 using TastyOrders.Services.Data.Interfaces;
 using TastyOrders.Web.ViewModels.Review;

@@ -1,14 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using TastyOrders.Data;
-using TastyOrders.Data.Models;
 using TastyOrders.Services.Data.Interfaces;
 using TastyOrders.Web.ViewModels.Restaurant;
 
 namespace TastyOrders.Web.Areas.Admin.Controllers
 {
     using static Common.ApplicationConstants;
+    using static Common.ErrorMessages.RestaurantManagement;
+    using static Common.EntityValidationMessages.RestaurantManagement;
 
     [Area(AdminRoleName)]
     [Authorize(Roles = AdminRoleName)]
@@ -46,11 +45,11 @@ namespace TastyOrders.Web.Areas.Admin.Controllers
 
             if (!success)
             {
-                TempData["ErrorMessage"] = "Name and location are required.";
+                TempData[ErrorMessage] = NameLocationRequired;
                 return RedirectToAction(nameof(ManageRestaurants));
             }
 
-            TempData["SuccessMessage"] = $"Restaurant '{name}' has been added successfully.";
+            TempData[SuccessMessage] = $"Restaurant '{name}' has been added successfully.";
             return RedirectToAction(nameof(ManageRestaurants));
         }
 
@@ -61,11 +60,11 @@ namespace TastyOrders.Web.Areas.Admin.Controllers
 
             if (!success)
             {
-                TempData["ErrorMessage"] = "Restaurant not found.";
+                TempData[ErrorMessage] = RestaurantNotFoundMessage;
                 return RedirectToAction(nameof(ManageRestaurants));
             }
 
-            TempData["SuccessMessage"] = "Restaurant has been removed successfully.";
+            TempData[SuccessMessage] = RestaurantSuccessfullyRemovedMessage;
             return RedirectToAction(nameof(ManageRestaurants));
         }
     }

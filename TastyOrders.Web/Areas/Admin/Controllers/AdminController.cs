@@ -1,14 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using TastyOrders.Data.Models;
 using TastyOrders.Services.Data.Interfaces;
-using TastyOrders.Web.ViewModels.Admin;
 
 namespace TastyOrders.Web.Areas.Admin.Controllers
 {
     using static Common.ApplicationConstants;
+    using static Common.ErrorMessages.Admin;
 
     [Area(AdminRoleName)]
     [Authorize(Roles = AdminRoleName)]
@@ -35,11 +32,11 @@ namespace TastyOrders.Web.Areas.Admin.Controllers
 
             if (!success)
             {
-                TempData["ErrorMessage"] = "Failed to assign role.";
+                TempData[ErrorMessage] = FailedToAssignRoleMessage;
                 return RedirectToAction(nameof(ManageRoles));
             }
 
-            TempData["SuccessMessage"] = $"Role '{role}' has been assigned successfully.";
+            TempData[SuccessMessage] = $"Role '{role}' has been assigned successfully.";
             return RedirectToAction(nameof(ManageRoles));
         }
 
@@ -50,11 +47,11 @@ namespace TastyOrders.Web.Areas.Admin.Controllers
 
             if (!success)
             {
-                TempData["ErrorMessage"] = "Failed to remove role.";
+                TempData[ErrorMessage] = FailedToRemoveRoleMessage;
                 return RedirectToAction(nameof(ManageRoles));
             }
 
-            TempData["SuccessMessage"] = $"Role '{role}' has been removed successfully.";
+            TempData[SuccessMessage] = $"Role '{role}' has been removed successfully.";
             return RedirectToAction(nameof(ManageRoles));
         }
 
@@ -65,11 +62,11 @@ namespace TastyOrders.Web.Areas.Admin.Controllers
 
             if (!success)
             {
-                TempData["ErrorMessage"] = message;
+                TempData[ErrorMessage] = message;
                 return RedirectToAction(nameof(ManageRoles));
             }
 
-            TempData["SuccessMessage"] = message;
+            TempData[SuccessMessage] = message;
             return RedirectToAction(nameof(ManageRoles));
         }
 
@@ -80,11 +77,11 @@ namespace TastyOrders.Web.Areas.Admin.Controllers
 
             if (!success)
             {
-                TempData["ErrorMessage"] = message;
+                TempData[ErrorMessage] = message;
                 return RedirectToAction(nameof(ManageRoles));
             }
 
-            TempData["SuccessMessage"] = message;
+            TempData[SuccessMessage] = message;
             return RedirectToAction(nameof(ManageRoles));
         }
     }

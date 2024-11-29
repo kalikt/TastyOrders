@@ -1,16 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TastyOrders.Data.Models;
 using TastyOrders.Services.Data.Interfaces;
 using TastyOrders.Web.ViewModels.Admin;
 
 namespace TastyOrders.Services.Data
 {
+    using static Common.EntityValidationMessages.Admin;
     public class AdminService : IAdminService
     {
         private readonly UserManager<ApplicationUser> userManager;
@@ -64,7 +60,7 @@ namespace TastyOrders.Services.Data
         {
             if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
             {
-                return (false, "Email and password are required.");
+                return (false, EmailAndPasswordRequiredMessage);
             }
 
             var newUser = new ApplicationUser
@@ -81,7 +77,7 @@ namespace TastyOrders.Services.Data
                 return (false, errorMessage);
             }
 
-            return (true, "User added successfully.");
+            return (true, SuccessfullyAddedUserMessage);
         }
 
         public async Task<(bool Success, string Message)> RemoveUserAsync(string userId)
@@ -89,14 +85,14 @@ namespace TastyOrders.Services.Data
             var user = await userManager.FindByIdAsync(userId);
             if (user == null)
             {
-                return (false, "User not found.");
+                return (false, UserNotFoundMessage);
             }
 
             var result = await userManager.DeleteAsync(user);
 
             if (!result.Succeeded)
             {
-                return (false, "Failed to remove user.");
+                return (false, FailedRemovalOfUserMessage);
             }
 
             return (true, $"User '{user.UserName}' has been removed successfully.");

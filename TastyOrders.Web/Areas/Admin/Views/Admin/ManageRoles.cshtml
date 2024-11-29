@@ -1,4 +1,5 @@
-﻿@using TastyOrders.Web.ViewModels.Admin;
+﻿@using static TastyOrders.Common.ApplicationConstants;
+@using TastyOrders.Web.ViewModels.Admin;
 @model IEnumerable<UserRoleViewModel>
 
 @{
@@ -7,13 +8,13 @@
 
 <h1>Manage Roles & Users</h1>
 
-@if (TempData["SuccessMessage"] != null)
+@if (TempData[SuccessMessage] != null)
 {
-    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    <div class="alert alert-success">@TempData[SuccessMessage]</div>
 }
-@if (TempData["ErrorMessage"] != null)
+@if (TempData[ErrorMessage] != null)
 {
-    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    <div class="alert alert-danger">@TempData[ErrorMessage]</div>
 }
 
 <h2>Manage Roles</h2>

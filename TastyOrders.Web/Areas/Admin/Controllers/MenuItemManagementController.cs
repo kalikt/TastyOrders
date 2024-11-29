@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TastyOrders.Data.Models;
 using TastyOrders.Services.Data.Interfaces;
 using TastyOrders.Web.ViewModels.MenuItem;
 
 namespace TastyOrders.Web.Areas.Admin.Controllers
 {
     using static Common.ApplicationConstants;
+    using static Common.ErrorMessages.MenuItemManagement;
 
     [Area(AdminRoleName)]
     [Authorize(Roles = AdminRoleName)]
@@ -26,7 +26,7 @@ namespace TastyOrders.Web.Areas.Admin.Controllers
 
             if (model == null)
             {
-                TempData["ErrorMessage"] = "Restaurant not found.";
+                TempData[ErrorMessage] = RestaurantNotFound;
                 return RedirectToAction("ManageRestaurants", "RestaurantManagement", new { area = AdminRoleName });
             }
 
@@ -47,11 +47,11 @@ namespace TastyOrders.Web.Areas.Admin.Controllers
 
             if (!success)
             {
-                TempData["ErrorMessage"] = "All fields are required, and price must be greater than 0.";
+                TempData[ErrorMessage] = RequiredFieldsMessage;
                 return RedirectToAction(nameof(AddMenuItem), new { restaurantId });
             }
 
-            TempData["SuccessMessage"] = "Menu item added successfully.";
+            TempData[SuccessMessage] = AddedItem;
             return RedirectToAction(nameof(ManageMenuItems), new { restaurantId });
         }
 
@@ -62,11 +62,11 @@ namespace TastyOrders.Web.Areas.Admin.Controllers
 
             if (restaurantId == null)
             {
-                TempData["ErrorMessage"] = "Menu item not found.";
+                TempData[ErrorMessage] = NotFoundItemMessage;
                 return RedirectToAction("ManageRestaurants", "RestaurantManagement", new { area = AdminRoleName });
             }
 
-            TempData["SuccessMessage"] = "Menu item removed successfully.";
+            TempData[SuccessMessage] = SuccessfullyRemovedMessage;
             return RedirectToAction(nameof(ManageMenuItems), new { restaurantId });
         }
 
@@ -77,7 +77,7 @@ namespace TastyOrders.Web.Areas.Admin.Controllers
 
             if (model == null)
             {
-                TempData["ErrorMessage"] = "Menu item not found.";
+                TempData[ErrorMessage] = NotFoundItemMessage;
                 return RedirectToAction("ManageRestaurants", "RestaurantManagement", new { area = AdminRoleName });
             }
 
@@ -97,11 +97,11 @@ namespace TastyOrders.Web.Areas.Admin.Controllers
             var success = await menuItemService.UpdateMenuItemAsync(updatedMenuItem);
             if (!success)
             {
-                TempData["ErrorMessage"] = "Failed to update the menu item. Please try again.";
+                TempData[ErrorMessage] = FailedToEditMessage;
                 return RedirectToAction("ManageMenuItems", new { restaurantId = updatedMenuItem.RestaurantId });
             }
 
-            TempData["SuccessMessage"] = "Menu item updated successfully.";
+            TempData[SuccessMessage] = SuccessfullyEditedMessage;
             return RedirectToAction("ManageMenuItems", new { restaurantId = updatedMenuItem.RestaurantId });
         }
 

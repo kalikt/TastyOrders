@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using TastyOrders.Data;
 using TastyOrders.Services.Data.Interfaces;
 using TastyOrders.Web.ViewModels.Review;
 
 namespace TastyOrders.Web.Areas.Admin.Controllers
 {
     using static Common.ApplicationConstants;
+    using static Common.ErrorMessages.ReviewManagement;
 
     [Area(AdminRoleName)]
     [Authorize(Roles = AdminRoleName)]
@@ -39,11 +38,11 @@ namespace TastyOrders.Web.Areas.Admin.Controllers
 
             if (!success)
             {
-                TempData["ErrorMessage"] = "Review not found.";
+                TempData[ErrorMessage] = ReviewNotFoundMessage;
                 return RedirectToAction(nameof(ManageReviews));
             }
 
-            TempData["SuccessMessage"] = "Review deleted successfully.";
+            TempData[SuccessMessage] = ReviewDeletedSuccesfullyMessage;
             return RedirectToAction(nameof(ManageReviews));
         }
     }
