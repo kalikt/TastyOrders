@@ -24,14 +24,15 @@
     else
     {
         @foreach (var restaurant in Model.Restaurants)
-        {
+        {   
             <div class="col-md-4 mb-4 restaurant-card" data-name="@restaurant.Name">
                 <div class="card">
                     <img src="@restaurant.ImageUrl" class="card-img-top" alt="@restaurant.Name" style="height: 200px; object-fit: cover;">
                     <div class="card-body">
                         <h5 class="card-title restaurant-name">@restaurant.Name</h5>
                         <p class="card-text">@restaurant.Location</p>
-                        <a asp-action="Details" asp-route-id="@restaurant.Id" class="btn btn-primary">View Details</a>
+                        <a href="@Url.Action("Menu", "Menu", new { id = restaurant.Id })" class="btn btn-primary">View Menu</a>
+                        <a asp-controller="Restaurant" asp-action="Details" asp-route-id="@restaurant.Id" class="btn btn-primary">View Reviews</a>
                     </div>
                 </div>
             </div>
