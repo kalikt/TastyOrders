@@ -131,6 +131,168 @@ namespace TastyOrders.Data.Configuration
             Price = 5.99m,
             ImageUrl = "/images/creamB.jpg",
             RestaurantId = 3
+        },
+        new MenuItem()
+        {
+            Id = 10,
+            Name = "Tomato Basil Soup",
+            Description = "A creamy and flavorful tomato soup with fresh basil.",
+            Price = 5.49m,
+            ImageUrl = "/images/tomatoBasilSoup.jpg",
+            RestaurantId = 4
+        },
+        new MenuItem()
+        {
+            Id = 11,
+            Name = "Cobb Salad",
+            Description = "Loaded salad with chicken, bacon, avocado, eggs, and blue cheese.",
+            Price = 9.99m,
+            ImageUrl = "/images/cobbSalad.jpg",
+            RestaurantId = 4
+        },
+        new MenuItem()
+        {
+            Id = 12,
+            Name = "French Onion Soup",
+            Description = "Rich onion soup topped with a layer of melted cheese and croutons.",
+            Price = 7.99m,
+            ImageUrl = "/images/frenchOnionSoup.jpg",
+            RestaurantId = 4
+        },
+        new MenuItem()
+        {
+            Id = 13,
+            Name = "Chicken Tacos",
+            Description = "Soft tacos filled with seasoned chicken and fresh toppings.",
+            Price = 9.99m,
+            ImageUrl = "/images/chickenTacos.jpg",
+            RestaurantId = 5
+        },
+        new MenuItem()
+        {
+            Id = 14,
+            Name = "Fish Tacos",
+            Description = "Crispy battered fish served with cabbage slaw and a zesty lime crema.",
+            Price = 11.49m,
+            ImageUrl = "/images/fishTacos.jpg",
+            RestaurantId = 5
+        },
+        new MenuItem()
+        {
+            Id = 15,
+            Name = "Beef Barbacoa Tacos",
+            Description = "Slow-cooked beef barbacoa with fresh cilantro, onions, and lime.",
+            Price = 8.99m,
+            ImageUrl = "/images/beefBarbacoaTacos.jpg",
+            RestaurantId = 5
+        },
+        new MenuItem()
+        {
+            Id = 16,
+            Name = "Grilled Salmon",
+            Description = "Perfectly grilled salmon served with a side of vegetables.",
+            Price = 15.99m,
+            ImageUrl = "/images/grilledSalmon.jpg",
+            RestaurantId = 6
+        },
+        new MenuItem()
+        {
+            Id = 17,
+            Name = "Shrimp Scampi",
+            Description = "Juicy shrimp cooked in a garlic butter sauce, served over linguine.",
+            Price = 19.99m,
+            ImageUrl = "/images/shrimpScampi.jpg",
+            RestaurantId = 6
+        },
+        new MenuItem()
+        {
+            Id = 18,
+            Name = "Steak Frites",
+            Description = "Grilled steak served with a side of crispy French fries.",
+            Price = 18.99m,
+            ImageUrl = "/images/steakFrites.jpg",
+            RestaurantId = 6
+        },
+        new MenuItem()
+        {
+            Id = 19,
+            Name = "Chocolate Brownie",
+            Description = "Rich chocolate brownie topped with vanilla ice cream.",
+            Price = 5.99m,
+            ImageUrl = "/images/chocolateBrownie.jpg",
+            RestaurantId = 7
+        },
+        new MenuItem()
+        {
+            Id = 20,
+            Name = "Classic Pancakes",
+            Description = "Stack of fluffy pancakes served with syrup and butter.",
+            Price = 5.49m,
+            ImageUrl = "/images/classicPancakes.jpg",
+            RestaurantId = 7
+        },
+        new MenuItem()
+        {
+            Id = 21,
+            Name = "Chocolate Lava Cake",
+            Description = "Warm chocolate cake with a gooey molten center, served with ice cream.",
+            Price = 6.99m,
+            ImageUrl = "/images/chocolateLavaCake.jpg",
+            RestaurantId = 7
+        },
+        new MenuItem()
+        {
+            Id = 22,
+            Name = "Fettuccine Alfredo",
+            Description = "Creamy Alfredo sauce over perfectly cooked fettuccine.",
+            Price = 12.99m,
+            ImageUrl = "/images/fettuccineAlfredo.jpg",
+            RestaurantId = 8
+        },
+        new MenuItem()
+        {
+            Id = 23,
+            Name = "Spaghetti Carbonara",
+            Description = "Classic Italian pasta with creamy egg sauce, pancetta, and Parmesan cheese.",
+            Price = 12.99m,
+            ImageUrl = "/images/spaghettiCarbonara.jpg",
+            RestaurantId = 8
+        },
+        new MenuItem()
+        {
+            Id = 24,
+            Name = "Penne Arrabbiata",
+            Description = "Spicy tomato-based pasta dish with penne, garlic, and red chili flakes.",
+            Price = 11.49m,
+            ImageUrl = "/images/penneArrabbiata.jpg",
+            RestaurantId = 8
+        },
+        new MenuItem()
+        {
+            Id = 25,
+            Name = "Pepperoni Pizza",
+            Description = "Classic pizza topped with pepperoni and melted mozzarella cheese.",
+            Price = 13.99m,
+            ImageUrl = "/images/pepperoniPizza.jpg",
+            RestaurantId = 9
+        },
+        new MenuItem()
+        {
+            Id = 26,
+            Name = "Four Cheese Pizza",
+            Description = "A blend of mozzarella, cheddar, Parmesan, and blue cheese on a crispy crust.",
+            Price = 11.99m,
+            ImageUrl = "/images/fourCheesePizza.jpg",
+            RestaurantId = 9
+        },
+        new MenuItem()
+        {
+            Id = 27,
+            Name = "BBQ Chicken Pizza",
+            Description = "Tender chicken, BBQ sauce, red onions, and cilantro on a wood-fired crust.",
+            Price = 13.49m,
+            ImageUrl = "/images/bbqChickenPizza.jpg",
+            RestaurantId = 9
         }
     };
             return menuItems;

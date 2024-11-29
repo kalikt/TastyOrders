@@ -102,12 +102,10 @@ namespace TastyOrders.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -144,12 +142,10 @@ namespace TastyOrders.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -388,6 +384,168 @@ namespace TastyOrders.Data.Migrations
                             Name = "Cream Brulee",
                             Price = 5.99m,
                             RestaurantId = 3
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Description = "A creamy and flavorful tomato soup with fresh basil.",
+                            ImageUrl = "/images/tomatoBasilSoup.jpg",
+                            Name = "Tomato Basil Soup",
+                            Price = 5.49m,
+                            RestaurantId = 4
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Description = "Loaded salad with chicken, bacon, avocado, eggs, and blue cheese.",
+                            ImageUrl = "/images/cobbSalad.jpg",
+                            Name = "Cobb Salad",
+                            Price = 9.99m,
+                            RestaurantId = 4
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Description = "Rich onion soup topped with a layer of melted cheese and croutons.",
+                            ImageUrl = "/images/frenchOnionSoup.jpg",
+                            Name = "French Onion Soup",
+                            Price = 7.99m,
+                            RestaurantId = 4
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Description = "Soft tacos filled with seasoned chicken and fresh toppings.",
+                            ImageUrl = "/images/chickenTacos.jpg",
+                            Name = "Chicken Tacos",
+                            Price = 9.99m,
+                            RestaurantId = 5
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Description = "Crispy battered fish served with cabbage slaw and a zesty lime crema.",
+                            ImageUrl = "/images/fishTacos.jpg",
+                            Name = "Fish Tacos",
+                            Price = 11.49m,
+                            RestaurantId = 5
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Description = "Slow-cooked beef barbacoa with fresh cilantro, onions, and lime.",
+                            ImageUrl = "/images/beefBarbacoaTacos.jpg",
+                            Name = "Beef Barbacoa Tacos",
+                            Price = 8.99m,
+                            RestaurantId = 5
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Description = "Perfectly grilled salmon served with a side of vegetables.",
+                            ImageUrl = "/images/grilledSalmon.jpg",
+                            Name = "Grilled Salmon",
+                            Price = 15.99m,
+                            RestaurantId = 6
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Description = "Juicy shrimp cooked in a garlic butter sauce, served over linguine.",
+                            ImageUrl = "/images/shrimpScampi.jpg",
+                            Name = "Shrimp Scampi",
+                            Price = 19.99m,
+                            RestaurantId = 6
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Description = "Grilled steak served with a side of crispy French fries.",
+                            ImageUrl = "/images/steakFrites.jpg",
+                            Name = "Steak Frites",
+                            Price = 18.99m,
+                            RestaurantId = 6
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Description = "Rich chocolate brownie topped with vanilla ice cream.",
+                            ImageUrl = "/images/chocolateBrownie.jpg",
+                            Name = "Chocolate Brownie",
+                            Price = 5.99m,
+                            RestaurantId = 7
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Description = "Stack of fluffy pancakes served with syrup and butter.",
+                            ImageUrl = "/images/classicPancakes.jpg",
+                            Name = "Classic Pancakes",
+                            Price = 5.49m,
+                            RestaurantId = 7
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Description = "Warm chocolate cake with a gooey molten center, served with ice cream.",
+                            ImageUrl = "/images/chocolateLavaCake.jpg",
+                            Name = "Chocolate Lava Cake",
+                            Price = 6.99m,
+                            RestaurantId = 7
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Description = "Creamy Alfredo sauce over perfectly cooked fettuccine.",
+                            ImageUrl = "/images/fettuccineAlfredo.jpg",
+                            Name = "Fettuccine Alfredo",
+                            Price = 12.99m,
+                            RestaurantId = 8
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Description = "Classic Italian pasta with creamy egg sauce, pancetta, and Parmesan cheese.",
+                            ImageUrl = "/images/spaghettiCarbonara.jpg",
+                            Name = "Spaghetti Carbonara",
+                            Price = 12.99m,
+                            RestaurantId = 8
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Description = "Spicy tomato-based pasta dish with penne, garlic, and red chili flakes.",
+                            ImageUrl = "/images/penneArrabbiata.jpg",
+                            Name = "Penne Arrabbiata",
+                            Price = 11.49m,
+                            RestaurantId = 8
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Description = "Classic pizza topped with pepperoni and melted mozzarella cheese.",
+                            ImageUrl = "/images/pepperoniPizza.jpg",
+                            Name = "Pepperoni Pizza",
+                            Price = 13.99m,
+                            RestaurantId = 9
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Description = "A blend of mozzarella, cheddar, Parmesan, and blue cheese on a crispy crust.",
+                            ImageUrl = "/images/fourCheesePizza.jpg",
+                            Name = "Four Cheese Pizza",
+                            Price = 11.99m,
+                            RestaurantId = 9
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Description = "Tender chicken, BBQ sauce, red onions, and cilantro on a wood-fired crust.",
+                            ImageUrl = "/images/bbqChickenPizza.jpg",
+                            Name = "BBQ Chicken Pizza",
+                            Price = 13.49m,
+                            RestaurantId = 9
                         });
                 });
 
@@ -492,6 +650,48 @@ namespace TastyOrders.Data.Migrations
                             ImageUrl = "/images/sweetPlace.jpg",
                             Location = "Veliko Tarnovo",
                             Name = "Sweet Place"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ImageUrl = "/images/soupAndSaladRestaurant.jpg",
+                            Location = "Sofia",
+                            Name = "Soup & Salad"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ImageUrl = "/images/tacoSpot.jpg",
+                            Location = "Sofia",
+                            Name = "Taco Spot"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ImageUrl = "/images/sunnyDiner.jpg",
+                            Location = "Varna",
+                            Name = "Sunny Diner"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ImageUrl = "/images/endorfino.jpg",
+                            Location = "Varna",
+                            Name = "Endorfino"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ImageUrl = "/images/pastaPlace.jpg",
+                            Location = "Veliko Tarnovo",
+                            Name = "Pasta Place"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ImageUrl = "/images/pizzaPlace.jpg",
+                            Location = "Veliko Tarnovo",
+                            Name = "Pizza Corner"
                         });
                 });
 

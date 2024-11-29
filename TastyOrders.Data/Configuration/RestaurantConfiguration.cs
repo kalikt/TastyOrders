@@ -62,6 +62,48 @@ namespace TastyOrders.Data.Configuration
                     Name = "Sweet Place",
                     Location = "Veliko Tarnovo",
                     ImageUrl = "/images/sweetPlace.jpg"
+                },
+                new Restaurant()
+                {
+                    Id = 4,
+                    Name = "Soup & Salad",
+                    Location = "Sofia",
+                    ImageUrl = "/images/soupAndSaladRestaurant.jpg"
+                }, 
+                new Restaurant()
+                {
+                    Id = 5,
+                    Name = "Taco Spot",
+                    Location = "Sofia",
+                    ImageUrl = "/images/tacoSpot.jpg"
+                },
+                new Restaurant()
+                {
+                    Id = 6,
+                    Name = "Sunny Diner",
+                    Location = "Varna",
+                    ImageUrl = "/images/sunnyDiner.jpg"
+                },
+                new Restaurant()
+                {
+                    Id = 7,
+                    Name = "Endorfino",
+                    Location = "Varna",
+                    ImageUrl = "/images/endorfino.jpg"
+                },
+                new Restaurant()
+                {
+                    Id = 8,
+                    Name = "Pasta Place",
+                    Location = "Veliko Tarnovo",
+                    ImageUrl = "/images/pastaPlace.jpg"
+                },
+                new Restaurant()
+                {
+                    Id = 9,
+                    Name = "Pizza Corner",
+                    Location = "Veliko Tarnovo",
+                    ImageUrl = "/images/pizzaPlace.jpg"
                 }
             };
 
