@@ -9,7 +9,6 @@ using TastyOrders.Services.Data.Interfaces;
 
 namespace TastyOrders.Web.Controllers
 {
-    [Authorize]
     public class CartController : Controller
     {
         private readonly ICartService cartService;
@@ -25,6 +24,12 @@ namespace TastyOrders.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> AddToCart(int menuItemId)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                TempData["ErrorMessage"] = "You must be logged in to add items to the cart.";
+                return Redirect("/Identity/Account/Register");
+            }
+
             var user = await userManager.GetUserAsync(User);
             if (user == null)
             {
@@ -44,6 +49,7 @@ namespace TastyOrders.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var user = await userManager.GetUserAsync(User);
@@ -56,8 +62,8 @@ namespace TastyOrders.Web.Controllers
             return View(cart);
         }
 
-        // Update item quantity
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> UpdateQuantity(int cartItemId, int quantity)
         {
             var success = await cartService.UpdateQuantityAsync(cartItemId, quantity);
@@ -70,8 +76,8 @@ namespace TastyOrders.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // Remove an item from the cart
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> RemoveItem(int cartItemId)
         {
             var success = await cartService.RemoveItemAsync(cartItemId);
