@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TastyOrders.Data;
 using TastyOrders.Services.Data.Interfaces;
 using TastyOrders.Web.ViewModels.Restaurant;

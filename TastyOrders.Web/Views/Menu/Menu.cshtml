@@ -11,16 +11,16 @@
 <div class="row">
     @foreach (var menuItem in Model.MenuItems)
     {
-        <div class="col-md-4 mb-4">
-            <div class="card">
+        <div class="col-md-4 mb-4 d-flex align-items-stretch">
+            <div class="card w-100">
                 <img src="@menuItem.ImageUrl" class="card-img-top" alt="@menuItem.Name" style="height: 200px; object-fit: cover;" />
-                <div class="card-body">
+                <div class="card-body d-flex flex-column">
                     <h5 class="card-title">@menuItem.Name</h5>
                     <p class="card-text">@menuItem.Description</p>
                     <p class="card-text"><strong>Price: $@menuItem.Price</strong></p>
                     @if (!User.IsInRole("Admin"))
                     {
-                        <form method="post" asp-action="AddToCart" asp-controller="Cart">
+                        <form method="post" asp-action="AddToCart" asp-controller="Cart" class="mt-auto">
                             <input type="hidden" name="menuItemId" value="@menuItem.Id" />
                             <button type="submit" class="btn btn-primary">Add to Cart</button>
                         </form>

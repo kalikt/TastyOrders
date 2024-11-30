@@ -30,5 +30,12 @@
             public const string ReviewNotFoundMessage = "Review not found.";
             public const string ReviewDeletedSuccesfullyMessage = "Review deleted successfully.";
         }
+
+        public static class Cart
+        {
+            public const string LoggedInMessage = "You must be logged in to add items to the cart.";
+            public const string AddItemErrorMessage = "Unable to add item to cart. Ensure all items are from the same location.";
+            public const string AddItemSuccessMessage = "Item added to cart!";
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿
-using TastyOrders.Data.Models;
+﻿using TastyOrders.Data.Models;
 using TastyOrders.Data;
 using TastyOrders.Services.Data.Interfaces;
 using TastyOrders.Web.ViewModels.Order;
@@ -90,7 +89,8 @@ namespace TastyOrders.Services.Data
                     Name = oi.MenuItem.Name,
                     Quantity = oi.Quantity,
                     Price = oi.Price
-                }).ToList()
+                })
+                .ToList()
             };
         }
     }

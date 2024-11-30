@@ -6,6 +6,8 @@ using TastyOrders.Services.Data.Interfaces;
 
 namespace TastyOrders.Web.Controllers
 {
+    using static Common.ApplicationConstants;
+    using static Common.ErrorMessages.Cart;
     public class CartController : Controller
     {
         private readonly ICartService cartService;
@@ -23,7 +25,7 @@ namespace TastyOrders.Web.Controllers
         {
             if (!User.Identity.IsAuthenticated)
             {
-                TempData["ErrorMessage"] = "You must be logged in to add items to the cart.";
+                TempData[ErrorMessage] = LoggedInMessage;
                 return Redirect("/Identity/Account/Register");
             }
 
@@ -37,11 +39,11 @@ namespace TastyOrders.Web.Controllers
 
             if (!success)
             {
-                TempData["ErrorMessage"] = "Unable to add item to cart. Ensure all items are from the same location.";
+                TempData[ErrorMessage] = AddItemErrorMessage;
                 return RedirectToAction(nameof(Index));
             }
 
-            TempData["SuccessMessage"] = "Item added to cart!";
+            TempData[SuccessMessage] = AddItemSuccessMessage;
             return RedirectToAction(nameof(Index));
         }
 
