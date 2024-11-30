@@ -37,5 +37,16 @@
             public const string AddItemErrorMessage = "Unable to add item to cart. Ensure all items are from the same location.";
             public const string AddItemSuccessMessage = "Item added to cart!";
         }
+
+        public static class Order
+        {
+            public const string EmptyCartMessage = "Your cart is empty!";
+            public const string OrderSuccessMessage = "Your order has been placed successfully!";
+        }
+
+        public static class Restaurant
+        {
+            public const string SelectLocationMessage = "Please select a location.";
+        }
     }
 }

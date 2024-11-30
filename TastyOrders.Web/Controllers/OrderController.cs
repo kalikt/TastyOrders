@@ -6,6 +6,9 @@ using TastyOrders.Services.Data.Interfaces;
 
 namespace TastyOrders.Web.Controllers
 {
+    using static Common.ApplicationConstants;
+    using static Common.ErrorMessages.Order;
+
     [Authorize]
     public class OrderController : Controller
     {
@@ -44,11 +47,11 @@ namespace TastyOrders.Web.Controllers
 
             if (!success)
             {
-                TempData["ErrorMessage"] = "Your cart is empty!";
-                return RedirectToAction("Index", "Cart");
+                TempData[ErrorMessage] = EmptyCartMessage;
+                return RedirectToAction(nameof(Index), nameof(Cart));
             }
 
-            TempData["SuccessMessage"] = "Your order has been placed successfully!";
+            TempData[SuccessMessage] = OrderSuccessMessage;
             return RedirectToAction(nameof(Index));
         }
 

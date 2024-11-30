@@ -4,6 +4,7 @@ using TastyOrders.Web.ViewModels.Restaurant;
 
 namespace TastyOrders.Web.Controllers
 {
+    using static Common.ErrorMessages.Restaurant;
     public class RestaurantController : Controller
     {
         private readonly IRestaurantService restaurantService;
@@ -30,13 +31,13 @@ namespace TastyOrders.Web.Controllers
         {
             if (string.IsNullOrEmpty(model.SelectedLocation))
             {
-                ModelState.AddModelError("", "Please select a location.");
+                ModelState.AddModelError("", SelectLocationMessage);
                 return View(model);
             }
                 
             TempData["SelectedLocation"] = model.SelectedLocation;
 
-            return RedirectToAction("Index", new { location = model.SelectedLocation });
+            return RedirectToAction(nameof(Index), new { location = model.SelectedLocation });
         }
 
         [HttpGet]
