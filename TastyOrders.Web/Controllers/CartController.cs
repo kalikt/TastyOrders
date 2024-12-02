@@ -26,7 +26,7 @@ namespace TastyOrders.Web.Controllers
             if (!User.Identity.IsAuthenticated)
             {
                 TempData[ErrorMessage] = LoggedInMessage;
-                return Redirect("/Identity/Account/Register");
+                return Redirect("/Identity/Account/Login");
             }
 
             var user = await userManager.GetUserAsync(User);
