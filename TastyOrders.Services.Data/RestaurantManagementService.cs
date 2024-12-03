@@ -59,5 +59,46 @@ namespace TastyOrders.Services.Data
             await context.SaveChangesAsync();
             return true;
         }
+
+        public async Task<EditRestaurantViewModel?> GetRestaurantByIdAsync(int id)
+        {
+            var restaurant = await context
+                .Restaurants
+                .FirstOrDefaultAsync(r => r.Id == id);
+
+            if (restaurant == null)
+            {
+                return null;
+            }
+
+            return new EditRestaurantViewModel
+            {
+                Id = restaurant.Id,
+                Name = restaurant.Name,
+                Location = restaurant.Location,
+                ImageUrl = restaurant.ImageUrl
+            };
+        }
+
+        public async Task<bool> EditRestaurantAsync(EditRestaurantViewModel editedModel)
+        {
+            if (string.IsNullOrWhiteSpace(editedModel.Name) || string.IsNullOrWhiteSpace(editedModel.Location))
+            {
+                return false;
+            }
+
+            var restaurant = await context.Restaurants.FindAsync(editedModel.Id);
+            if (restaurant == null)
+            {
+                return false;
+            }
+
+            restaurant.Name = editedModel.Name;
+            restaurant.Location = editedModel.Location;
+            restaurant.ImageUrl = editedModel.ImageUrl;
+
+            await context.SaveChangesAsync();
+            return true;
+        }
     }
 }

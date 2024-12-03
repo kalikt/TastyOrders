@@ -1,0 +1,25 @@
+﻿@model TastyOrders.Web.ViewModels.Restaurant.EditRestaurantViewModel
+
+<h1 class="mb-4">Edit Restaurant</h1>
+
+<form asp-action="EditRestaurant" asp-controller="RestaurantManagement" asp-area="Admin" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" asp-for="Name" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" id="location" asp-for="Location" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="imageUrl">Image URL</label>
+        <input type="text" id="imageUrl" asp-for="ImageUrl" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a asp-action="ManageRestaurants" class="btn btn-secondary">Cancel</a>
+</form>

@@ -67,5 +67,41 @@ namespace TastyOrders.Web.Areas.Admin.Controllers
             TempData[SuccessMessage] = RestaurantSuccessfullyRemovedMessage;
             return RedirectToAction(nameof(ManageRestaurants));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> EditRestaurant(int id)
+        {
+            var restaurant = await restaurantService.GetRestaurantByIdAsync(id);
+
+            if (restaurant == null)
+            {
+                TempData[ErrorMessage] = RestaurantNotFoundMessage;
+                return RedirectToAction(nameof(ManageRestaurants));
+            }
+
+            return View(restaurant);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditRestaurant(EditRestaurantViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var success = await restaurantService.EditRestaurantAsync(model);
+
+            if (!success)
+            {
+                TempData[ErrorMessage] = RestaurantEditFailedMessage;
+                return RedirectToAction(nameof(ManageRestaurants));
+            }
+
+            TempData[SuccessMessage] = $"Restaurant '{model.Name}' has been successfully updated.";
+            return RedirectToAction(nameof(ManageRestaurants));
+        }
+
+
     }
 }

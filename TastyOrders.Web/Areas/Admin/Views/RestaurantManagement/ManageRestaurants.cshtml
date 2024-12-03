@@ -38,6 +38,10 @@
                         <input type="hidden" name="restaurantId" value="@restaurant.Id" />
                         <button type="submit" class="btn btn-danger btn-sm">Remove</button>
                     </form>
+                    <form asp-action="EditRestaurant" asp-route-id="@restaurant.Id" asp-controller="RestaurantManagement" asp-area="Admin" method="get" class="d-inline">
+                        <input type="hidden" name="restaurantId" value="@restaurant.Id" />
+                        <button type="submit" class="btn btn-warning btn-sm">Edit</button>
+                    </form>
                 </td>
                 <td>
                     <form asp-action="ManageMenuItems" asp-controller="MenuItemManagement" asp-area="Admin" method="get" class="d-inline">

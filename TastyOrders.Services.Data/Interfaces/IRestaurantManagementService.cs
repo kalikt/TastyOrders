@@ -8,5 +8,8 @@ namespace TastyOrders.Services.Data.Interfaces
         Task<List<RestaurantViewModel>> GetAllRestaurantsAsync();
         Task<bool> AddRestaurantAsync(string name, string location, string? imageUrl);
         Task<bool> RemoveRestaurantAsync(int restaurantId);
+
+        public Task<EditRestaurantViewModel?> GetRestaurantByIdAsync(int id);
+        Task<bool> EditRestaurantAsync(EditRestaurantViewModel editedModel);
     }
 }

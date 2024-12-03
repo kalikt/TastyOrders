@@ -23,6 +23,7 @@
         {
             public const string RestaurantNotFoundMessage = "Restaurant not found.";
             public const string RestaurantSuccessfullyRemovedMessage = "Restaurant has been removed successfully.";
+            public const string RestaurantEditFailedMessage = "Failed to edit restaurant.";
         }
 
         public static class ReviewManagement
