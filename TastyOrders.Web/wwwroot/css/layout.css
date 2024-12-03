@@ -1,0 +1,28 @@
+﻿html, body {
+    height: 100%;
+}
+
+#page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+#content-wrap {
+    flex: 1; 
+}
+
+footer {
+    background-color: #f8f9fa;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.navbar .nav-link {
+    transition: color 0.2s ease-in-out;
+}
+
+    .navbar .nav-link:hover {
+        color: #007bff !important; 
+        text-decoration: underline;
+    }
