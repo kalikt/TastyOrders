@@ -1,0 +1,31 @@
+﻿.card {
+    border-radius: 10px;
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+    .card:hover {
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+    }
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.card img {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+.btn-outline-primary, .btn-outline-secondary {
+    border-width: 2px;
+}
+
+    .btn-outline-primary:hover, .btn-outline-secondary:hover {
+        color: #fff;
+    }
+
+h5 {
+    text-align: center;
+}
