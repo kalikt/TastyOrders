@@ -4,33 +4,47 @@
 @{
     ViewData["Title"] = "Order Details";
 }
+<link rel="stylesheet" href="~/css/orderDetails.css" asp-append-version="true" />
+<div class="container my-5">
+    <div class="text-center mb-4">
+        <h1 class="text-primary fw-bold">Order Details</h1>
+    </div>
 
-<h1>Order Details</h1>
+    <div class="card mb-4 shadow-sm border-0">
+        <div class="card-body">
+            <p><strong>Order ID:</strong> <span class="text-primary">#@Model.Id</span></p>
+            <p><strong>Order Date:</strong> <span class="text-muted">@Model.OrderDate.ToString()</span></p>
+            <p><strong>Total Amount:</strong> <span class="text-success fw-bold">$@Model.TotalAmount</span></p>
+            <p><strong>Restaurant:</strong> <span class="text-secondary">@Model.RestaurantName</span></p>
+            <p><strong>Location:</strong> @Model.RestaurantLocation</p>
+        </div>
+    </div>
 
-<p><strong>Order ID:</strong> @Model.Id</p>
-<p><strong>Order Date:</strong> @Model.OrderDate.ToString()</p>
-<p><strong>Total Amount:</strong> $@Model.TotalAmount</p>
-<p><strong>Restaurant:</strong> @Model.RestaurantName</p>
-<p><strong>Location:</strong> @Model.RestaurantLocation</p>
+    <div class="table-responsive mb-4">
+        <table class="table table-striped align-middle">
+            <thead class="table-primary">
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td class="fw-bold">@item.Name</td>
+                        <td>@item.Quantity</td>
+                        <td class="text-success">$@item.Price</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Item</th>
-            <th>Quantity</th>
-            <th>Price</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Items)
-        {
-            <tr>
-                <td>@item.Name</td>
-                <td>@item.Quantity</td>
-                <td>$@item.Price</td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<a href="@Url.Action("Index", "Restaurant")" class="btn btn-primary">Continue Shopping</a>
+    <div class="text-center">
+        <a href="@Url.Action("Index", "Restaurant")" class="btn btn-outline-primary">
+            <i class="fas fa-shopping-cart"></i> Continue Shopping
+        </a>
+    </div>
+</div>
