@@ -1,0 +1,24 @@
+﻿.star {
+    font-size: 2rem;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+    .star:hover,
+    .star.active {
+        color: #f39c12;
+    }
+
+.form-label {
+    font-size: 1.2rem;
+}
+
+.btn-primary {
+    border-radius: 8px;
+    font-size: 1.1rem;
+}
+
+textarea {
+    border-radius: 10px;
+}

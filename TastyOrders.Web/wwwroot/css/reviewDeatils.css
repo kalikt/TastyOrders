@@ -1,0 +1,24 @@
+﻿h1 {
+    font-size: 2.5rem;
+}
+
+.list-group-item {
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+    .list-group-item:hover {
+        background-color: #f9f9f9;
+    }
+
+.badge {
+    font-size: 1rem;
+}
+
+.btn-primary {
+    border-radius: 8px;
+}
+
+.alert {
+    border-radius: 8px;
+}

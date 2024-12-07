@@ -1,27 +1,33 @@
-﻿﻿@using TastyOrders.Web.ViewModels.Review;
+﻿@using TastyOrders.Web.ViewModels.Review
 @model ReviewCreateViewModel
 
 @{
-    ViewData["Title"] = "Create review";
+    ViewData["Title"] = "Create Review";
 }
+<script src="/js/reviewStar.js"></script>
+<link rel="stylesheet" href="~/css/reviewCreate.css" asp-append-version="true" />
+<div class="container my-5">
+    <h1 class="text-primary fw-bold mb-4">Leave a Review for <span class="text-secondary">@Model.RestaurantName</span></h1>
 
-<h1>Leave a Review for @Model.RestaurantName</h1>
+    <form asp-action="Create" method="post">
+        <input type="hidden" asp-for="RestaurantId" />
 
-<form asp-action="Create" method="post">
-    <input type="hidden" asp-for="RestaurantId" />
-    <div class="form-group">
-        <label asp-for="Rating">Rating</label>
-        <select asp-for="Rating" class="form-control">
-            <option value="1">1 - Poor</option>
-            <option value="2">2 - Fair</option>
-            <option value="3">3 - Good</option>
-            <option value="4">4 - Very Good</option>
-            <option value="5">5 - Excellent</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label asp-for="Comment">Comment</label>
-        <textarea asp-for="Comment" class="form-control" rows="5"></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit Review</button>
-</form>
+        <div class="form-group mb-4">
+            <label for="rating" class="form-label fw-bold">Rating</label>
+            <div id="starRating" class="d-flex align-items-center">
+                <input type="hidden" asp-for="Rating" id="ratingInput" />
+                @for (var i = 1; i <= 5; i++)
+                {
+                    <i class="fas fa-star star" data-value="@i"></i>
+                }
+            </div>
+        </div>
+
+        <div class="form-group mb-4">
+            <label asp-for="Comment" class="form-label fw-bold">Comment</label>
+            <textarea asp-for="Comment" class="form-control" rows="5" placeholder="Write your review here..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg">Submit Review</button>
+    </form>
+</div>
