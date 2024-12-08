@@ -43,16 +43,16 @@ namespace TastyOrders.Web.Controllers
                 return Unauthorized();
             }
 
-            var success = await orderService.PlaceOrderAsync(user.Id);
+            var orderId = await orderService.PlaceOrderAsync(user.Id);
 
-            if (!success)
+            if (orderId == null)
             {
                 TempData[ErrorMessage] = EmptyCartMessage;
                 return RedirectToAction(nameof(Index), nameof(Cart));
             }
 
             TempData[SuccessMessage] = OrderSuccessMessage;
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Details), new { id = orderId });
         }
 
         public async Task<IActionResult> Details(int id)

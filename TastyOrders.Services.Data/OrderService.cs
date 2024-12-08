@@ -32,7 +32,7 @@ namespace TastyOrders.Services.Data
                 .ToListAsync();
         }
 
-        public async Task<bool> PlaceOrderAsync(string userId)
+        public async Task<int?> PlaceOrderAsync(string userId)
         {
             var cart = await context.Carts
                 .Include(c => c.CartItems)
@@ -41,7 +41,7 @@ namespace TastyOrders.Services.Data
 
             if (cart == null || !cart.CartItems.Any())
             {
-                return false;
+                return null;
             }
 
             var order = new Order
@@ -58,11 +58,12 @@ namespace TastyOrders.Services.Data
             };
 
             context.Orders.Add(order);
-            context.CartItems.RemoveRange(cart.CartItems); 
+            context.CartItems.RemoveRange(cart.CartItems);
             await context.SaveChangesAsync();
 
-            return true;
+            return order.Id;
         }
+
 
         public async Task<OrderDetailsViewModel?> GetOrderDetailsAsync(int orderId, string userId)
         {
