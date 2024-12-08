@@ -5,48 +5,65 @@
 @{
     ViewData["Title"] = "Manage Menu Items";
 }
+<link rel="stylesheet" href="~/css/manageMenuItems.css" asp-append-version="true" />
+<div class="container my-5">
+    <h1 class="text-primary fw-bold mb-4">Manage Menu Items for <span class="text-secondary">@Model.RestaurantName</span></h1>
 
-<h1>Manage Menu Items for @Model.RestaurantName</h1>
+    @if (TempData[SuccessMessage] != null)
+    {
+        <div class="alert alert-success text-center" role="alert">
+            @TempData[SuccessMessage]
+        </div>
+    }
+    @if (TempData[ErrorMessage] != null)
+    {
+        <div class="alert alert-danger text-center" role="alert">
+            @TempData[ErrorMessage]
+        </div>
+    }
 
-@if (TempData[SuccessMessage] != null)
-{
-    <div class="alert alert-success">@TempData[SuccessMessage]</div>
-}
-@if (TempData[ErrorMessage] != null)
-{
-    <div class="alert alert-danger">@TempData[ErrorMessage]</div>
-}
+    <div class="table-responsive mb-4">
+        <table class="table table-striped align-middle">
+            <thead class="table-primary">
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var menuItem in Model.MenuItems)
+                {
+                    <tr>
+                        <td class="fw-bold">@menuItem.Name</td>
+                        <td class="text-success">$@menuItem.Price</td>
+                        <td class="text-truncate" style="max-width: 300px;" title="@menuItem.Description">
+                            @menuItem.Description
+                        </td>
+                        <td class="text-center">
+                            <a asp-action="EditMenuItem" asp-controller="MenuItemManagement" asp-area="Admin" asp-route-menuItemId="@menuItem.Id" class="btn btn-sm btn-outline-warning me-2">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <form asp-action="RemoveMenuItem" asp-controller="MenuItemManagement" asp-area="Admin" method="post" class="d-inline">
+                                <input type="hidden" name="menuItemId" value="@menuItem.Id" />
+                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                    <i class="fas fa-trash-alt"></i> Remove
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Description</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var menuItem in Model.MenuItems)
-        {
-            <tr>
-                <td>@menuItem.Name</td>
-                <td>$@menuItem.Price</td>
-                <td>@menuItem.Description</td>
-                <td>
-                    <form asp-action="EditMenuItem" asp-controller="MenuItemManagement" asp-area="Admin" method="get" class="d-inline">
-                        <input type="hidden" name="menuItemId" value="@menuItem.Id" />
-                        <button type="submit" class="btn btn-warning btn-sm">Edit</button>
-                    </form>
-                    <form asp-action="RemoveMenuItem" asp-controller="MenuItemManagement" asp-area="Admin" method="post" class="d-inline">
-                        <input type="hidden" name="menuItemId" value="@menuItem.Id" />
-                        <button type="submit" class="btn btn-danger btn-sm">Remove</button>
-                    </form>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<a asp-action="AddMenuItem" asp-controller="MenuItemManagement" asp-area="Admin" asp-route-restaurantId="@Model.RestaurantId" class="btn btn-primary mt-3">Add New Menu Item</a>
-<a asp-action="ManageRestaurants" asp-controller="RestaurantManagement" asp-area="Admin" class="btn btn-secondary mt-3">Back to Manage Restaurants</a>
+    <div class="d-flex justify-content-between">
+        <a asp-action="AddMenuItem" asp-controller="MenuItemManagement" asp-area="Admin" asp-route-restaurantId="@Model.RestaurantId" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Add New Menu Item
+        </a>
+        <a asp-action="ManageRestaurants" asp-controller="RestaurantManagement" asp-area="Admin" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back to Manage Restaurants
+        </a>
+    </div>
+</div>

@@ -5,54 +5,69 @@
 @{
     ViewData["Title"] = "Manage Restaurants";
 }
+<link rel="stylesheet" href="~/css/manageRestaurants.css" asp-append-version="true" />
+<div class="container my-5">
+    <h1 class="text-primary fw-bold mb-4">Manage Restaurants</h1>
 
-<h1>Manage Restaurants</h1>
+    @if (TempData[SuccessMessage] != null)
+    {
+        <div class="alert alert-success text-center" role="alert">
+            @TempData[SuccessMessage]
+        </div>
+    }
+    @if (TempData[ErrorMessage] != null)
+    {
+        <div class="alert alert-danger text-center" role="alert">
+            @TempData[ErrorMessage]
+        </div>
+    }
 
-@if (TempData[SuccessMessage] != null)
-{
-    <div class="alert alert-success">@TempData[SuccessMessage]</div>
-}
-@if (TempData[ErrorMessage] != null)
-{
-    <div class="alert alert-danger">@TempData[ErrorMessage]</div>
-}
+    <h2 class="text-secondary fw-bold mb-3">Existing Restaurants</h2>
+    <div class="table-responsive mb-4">
+        <table class="table table-striped align-middle">
+            <thead class="table-primary">
+                <tr>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th class="text-center">Actions</th>
+                    <th class="text-center">Manage Menu</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var restaurant in Model.Restaurants)
+                {
+                    <tr>
+                        <td class="fw-bold">@restaurant.Name</td>
+                        <td>@restaurant.Location</td>
+                        <td class="text-center">
+                            <form asp-action="EditRestaurant" asp-route-id="@restaurant.Id" asp-controller="RestaurantManagement" asp-area="Admin" method="get" class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-outline-warning me-2">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                            </form>
+                            <form asp-action="RemoveRestaurant" asp-controller="RestaurantManagement" asp-area="Admin" method="post" class="d-inline">
+                                <input type="hidden" name="restaurantId" value="@restaurant.Id" />
+                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                    <i class="fas fa-trash-alt"></i> Remove
+                                </button>
+                            </form>
+                        </td>
+                        <td class="text-center">
+                            <form asp-action="ManageMenuItems" asp-controller="MenuItemManagement" asp-area="Admin" method="get" class="d-inline">
+                                <input type="hidden" name="restaurantId" value="@restaurant.Id" />
+                                <button type="submit" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-utensils"></i> Manage Menu
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
-<h2>Existing Restaurants</h2>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Location</th>
-            <th>Actions</th>
-            <th>Manage Menu</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var restaurant in Model.Restaurants)
-        {
-            <tr>
-                <td>@restaurant.Name</td>
-                <td>@restaurant.Location</td>
-                <td>
-                    <form asp-action="RemoveRestaurant" asp-controller="RestaurantManagement" asp-area="Admin" method="post" class="d-inline">
-                        <input type="hidden" name="restaurantId" value="@restaurant.Id" />
-                        <button type="submit" class="btn btn-danger btn-sm">Remove</button>
-                    </form>
-                    <form asp-action="EditRestaurant" asp-route-id="@restaurant.Id" asp-controller="RestaurantManagement" asp-area="Admin" method="get" class="d-inline">
-                        <input type="hidden" name="restaurantId" value="@restaurant.Id" />
-                        <button type="submit" class="btn btn-warning btn-sm">Edit</button>
-                    </form>
-                </td>
-                <td>
-                    <form asp-action="ManageMenuItems" asp-controller="MenuItemManagement" asp-area="Admin" method="get" class="d-inline">
-                        <input type="hidden" name="restaurantId" value="@restaurant.Id" />
-                        <button type="submit" class="btn btn-primary btn-sm">Manage Menu</button>
-                    </form>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<h2>Add a New Restaurant</h2>
-<a asp-action="AddRestaurant" asp-controller="RestaurantManagement" asp-area="Admin" class="btn btn-primary">Add New Restaurant</a>
+    <h2 class="text-secondary fw-bold mb-3">Add a New Restaurant</h2>
+    <a asp-action="AddRestaurant" asp-controller="RestaurantManagement" asp-area="Admin" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Add New Restaurant
+    </a>
+</div>

@@ -1,0 +1,56 @@
+﻿h1 {
+    font-size: 2rem;
+}
+
+.table {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table thead {
+    font-size: 1.1rem;
+}
+
+.table-primary {
+    background-color: #f0f9ff;
+}
+
+.table td,
+.table th {
+    vertical-align: middle;
+}
+
+.btn {
+    border-radius: 8px;
+}
+
+.btn-outline-warning {
+    border-color: #ffc107;
+    color: #ffc107;
+}
+
+.btn-outline-warning:hover {
+    background-color: #ffc107;   
+    color: #fff;
+}
+
+.btn-outline-danger {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.alert {
+    font-size: 1.1rem;
+    border-radius: 8px;
+}
+
+.text-truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
