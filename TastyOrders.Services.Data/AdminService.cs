@@ -40,6 +40,12 @@ namespace TastyOrders.Services.Data
                 return false;
             }
 
+            var userRoles = await userManager.GetRolesAsync(user);
+            if (userRoles.Any())
+            {
+                return false; 
+            }
+
             var result = await userManager.AddToRoleAsync(user, role);
             return result.Succeeded;
         }
