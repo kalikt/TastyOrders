@@ -5,86 +5,100 @@
 @{
     ViewData["Title"] = "Manage Roles & Users";
 }
+<link rel="stylesheet" href="~/css/manageRoles.css" asp-append-version="true" />
+<div class="container my-5">
+    <h1 class="text-primary fw-bold mb-4">Manage Roles & Users</h1>
 
-<h1>Manage Roles & Users</h1>
+    @if (TempData[SuccessMessage] != null)
+    {
+        <div class="alert alert-success text-center" role="alert">
+            @TempData[SuccessMessage]
+        </div>
+    }
+    @if (TempData[ErrorMessage] != null)
+    {
+        <div class="alert alert-danger text-center" role="alert">
+            @TempData[ErrorMessage]
+        </div>
+    }
 
-@if (TempData[SuccessMessage] != null)
-{
-    <div class="alert alert-success">@TempData[SuccessMessage]</div>
-}
-@if (TempData[ErrorMessage] != null)
-{
-    <div class="alert alert-danger">@TempData[ErrorMessage]</div>
-}
-
-<h2>Manage Roles</h2>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>User</th>
-            <th>Roles</th>
-            <th>Assign New Role</th>
-            <th>Remove</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model)
-        {
-            <tr>
-                <td>@user.UserName</td>
-                <td>
-                    @if (user.Roles.Any())
-                    {
-                        @string.Join(", ", user.Roles)
-                    }
-                    else
-                    {
-                        <em>No roles assigned</em>
-                    }
-                </td>
-                <td>
-                    <form asp-action="AssignRole" asp-controller="Admin" asp-area="Admin" method="post">
-                        <input type="hidden" name="userId" value="@user.UserId" />
-                        <select name="role" class="form-select">
-                            @foreach (var role in user.AllRoles)
+    <h2 class="text-secondary fw-bold mb-3">Manage Roles</h2>
+    <div class="table-responsive mb-5">
+        <table class="table table-striped align-middle">
+            <thead class="table-primary">
+                <tr>
+                    <th>User</th>
+                    <th>Roles</th>
+                    <th>Assign New Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td class="fw-bold">@user.UserName</td>
+                        <td>
+                            @if (user.Roles.Any())
                             {
-                                <option value="@role">@role</option>
+                                <span class="badge bg-info text-dark me-1">@string.Join("</span> <span class=\"badge bg-info text-dark me-1\">", user.Roles)</span>
                             }
-                        </select>
-                        <button type="submit" class="btn btn-primary btn-sm mt-2">Assign Role</button>
-                        @if (user.Roles.Any())
-                        {
-                            @foreach (var role in user.Roles)
+                            else
                             {
-                                <form asp-action="RemoveRole" asp-controller="Admin" asp-area="Admin" method="post" class="d-inline">
-                                    <input type="hidden" name="userId" value="@user.UserId" />
-                                    <input type="hidden" name="role" value="@role" />
-                                    <button type="submit" class="btn btn-danger btn-sm mt-2">Remove Role</button>
-                                </form>
+                                <em class="text-muted">No roles assigned</em>
                             }
-                        }
-                    </form>
-                </td>
-                <td>
-                    <form asp-action="RemoveUser" asp-controller="Admin" asp-area="Admin" method="post" class="d-inline">
-                        <input type="hidden" name="userId" value="@user.UserId" />
-                        <button type="submit" class="btn btn-danger btn-sm">Remove user</button>
-                    </form>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                        </td>
+                        <td>
+                            <form asp-action="AssignRole" asp-controller="Admin" asp-area="Admin" method="post">
+                                <input type="hidden" name="userId" value="@user.UserId" />
+                                <div class="d-flex align-items-center">
+                                    <select name="role" class="form-select me-2">
+                                        @foreach (var role in user.AllRoles)
+                                        {
+                                            <option value="@role">@role</option>
+                                        }
+                                    </select>
+                                    <button type="submit" class="btn btn-primary btn-sm">Assign</button>
+                                </div>
+                            </form>
+                        </td>
+                        <td>
+                            @if (user.Roles.Any())
+                            {
+                                @foreach (var role in user.Roles)
+                                {
+                                    <form asp-action="RemoveRole" asp-controller="Admin" asp-area="Admin" method="post" class="d-inline">
+                                        <input type="hidden" name="userId" value="@user.UserId" />
+                                        <input type="hidden" name="role" value="@role" />
+                                        <button type="submit" class="btn btn-danger btn-sm mt-2">Remove role</button>
+                                    </form>
+                                }
+                            }
+                            <form asp-action="RemoveUser" asp-controller="Admin" asp-area="Admin" method="post" class="d-inline">
+                                <input type="hidden" name="userId" value="@user.UserId" />
+                                <button type="submit" class="btn btn-danger btn-sm mt-2">Remove User</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
-<h2>Add a New User</h2>
-<form asp-action="AddUser" asp-controller="Admin" asp-area="Admin" method="post">
-    <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" class="form-control" required />
-    </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" class="form-control" required />
-    </div>
-    <button type="submit" class="btn btn-primary mt-2">Add User</button>
-</form>
+    <h2 class="text-secondary fw-bold mb-3">Add a New User</h2>
+    <form asp-action="AddUser" asp-controller="Admin" asp-area="Admin" method="post" class="mb-4">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" name="email" class="form-control" required />
+            </div>
+            <div class="col-md-6">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" name="password" class="form-control" required />
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-user-plus"></i> Add User
+        </button>
+    </form>
+</div>

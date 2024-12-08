@@ -1,0 +1,33 @@
+﻿h1, h2 {
+    font-size: 2rem;
+}
+
+.badge {
+    font-size: 0.9rem;
+}
+
+.table {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+    .table thead {
+        font-size: 1.1rem;
+    }
+
+.table-primary {
+    background-color: #f0f9ff;
+}
+
+.form-select {
+    border-radius: 8px;
+}
+
+.btn-primary, .btn-danger {
+    border-radius: 8px;
+}
+
+.alert {
+    font-size: 1.1rem;
+    border-radius: 8px;
+}
