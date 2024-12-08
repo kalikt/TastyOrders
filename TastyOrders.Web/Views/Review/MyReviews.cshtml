@@ -4,38 +4,49 @@
 @{
     ViewData["Title"] = "My Reviews";
 }
+<link rel="stylesheet" href="~/css/myReviews.css" asp-append-version="true" />
+<div class="container my-5">
+    <h1 class="text-primary fw-bold mb-4">My Reviews</h1>
 
-<h1>My Reviews</h1>
-
-@if (!Model.Any())
-{
-    <p>You haven't left any reviews yet.</p>
-}
-else
-{
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Restaurant</th>
-                <th>Rating</th>
-                <th>Comment</th>
-                <th>Created At</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var review in Model)
-            {
-                <tr>
-                    <td>
-                        <a asp-controller="Restaurant" asp-action="Details" asp-route-id="@review.RestaurantId">
-                            @review.RestaurantName
-                        </a>
-                    </td>
-                    <td>@review.Rating/5</td>
-                    <td>@review.Comment</td>
-                    <td>@review.CreatedAt.ToString()</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info text-center" role="alert">
+            You haven't left any reviews yet.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-striped align-middle">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Restaurant</th>
+                        <th>Rating</th>
+                        <th>Comment</th>
+                        <th>Created At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var review in Model)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-controller="Restaurant" asp-action="Details" asp-route-id="@review.RestaurantId" class="text-decoration-none fw-bold">
+                                    @review.RestaurantName
+                                </a>
+                            </td>
+                            <td>
+                                <span class="text-warning">@string.Concat(Enumerable.Repeat("★", review.Rating))</span>
+                                <span class="text-muted">@string.Concat(Enumerable.Repeat("☆", 5 - review.Rating))</span>
+                            </td>
+                            <td class="text-truncate" style="max-width: 300px;" title="@review.Comment">
+                                @review.Comment
+                            </td>
+                            <td>@review.CreatedAt.ToString()</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
