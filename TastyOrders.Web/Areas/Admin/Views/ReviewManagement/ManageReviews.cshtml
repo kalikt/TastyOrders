@@ -5,43 +5,56 @@
 @{
     ViewData["Title"] = "Manage Reviews";
 }
+<link rel="stylesheet" href="~/css/manageReviews.css" asp-append-version="true" />
+<div class="container my-5">
+    <h1 class="text-primary fw-bold mb-4">Manage User Reviews</h1>
 
-<h1>Manage User Reviews</h1>
+    @if (TempData[SuccessMessage] != null)
+    {
+        <div class="alert alert-success text-center" role="alert">
+            @TempData[SuccessMessage]
+        </div>
+    }
+    @if (TempData[ErrorMessage] != null)
+    {
+        <div class="alert alert-danger text-center" role="alert">
+            @TempData[ErrorMessage]
+        </div>
+    }
 
-@if (TempData[SuccessMessage] != null)
-{
-    <div class="alert alert-success">@TempData[SuccessMessage]</div>
-}
-@if (TempData[ErrorMessage] != null)
-{
-    <div class="alert alert-danger">@TempData[ErrorMessage]</div>
-}
-
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Restaurant</th>
-            <th>User</th>
-            <th>Rating</th>
-            <th>Comment</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var review in Model.Reviews)
-        {
-            <tr>
-                <td>@review.RestaurantName</td>
-                <td>@review.UserName</td>
-                <td>@review.Rating / 5</td>
-                <td>@review.Comment</td>
-                <td>
-                    <form asp-action="DeleteReview" asp-controller="ReviewManagement" asp-area="Admin" method="post" class="d-inline">
-                        <input type="hidden" name="reviewId" value="@review.Id" />
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                    </form>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <div class="table-responsive">
+        <table class="table table-striped align-middle">
+            <thead class="table-primary">
+                <tr>
+                    <th>Restaurant</th>
+                    <th>User</th>
+                    <th>Rating</th>
+                    <th>Comment</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var review in Model.Reviews)
+                {
+                    <tr>
+                        <td class="fw-bold">@review.RestaurantName</td>
+                        <td>@review.UserName</td>
+                        <td>
+                            <span class="text-warning">@string.Concat(Enumerable.Repeat("★", review.Rating))</span>
+                            <span class="text-muted">@string.Concat(Enumerable.Repeat("☆", 5 - review.Rating))</span>
+                        </td>
+                        <td class="text-truncate" style="max-width: 300px;" title="@review.Comment">@review.Comment</td>
+                        <td class="text-center">
+                            <form asp-action="DeleteReview" asp-controller="ReviewManagement" asp-area="Admin" method="post" class="d-inline">
+                                <input type="hidden" name="reviewId" value="@review.Id" />
+                                <button type="submit" class="btn btn-outline-danger btn-sm">
+                                    <i class="fas fa-trash-alt"></i> Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
