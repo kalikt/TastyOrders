@@ -1,14 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using TastyOrders.Data;
 
 namespace TastyOrders.Web.Infrastructure.Extensions
 {

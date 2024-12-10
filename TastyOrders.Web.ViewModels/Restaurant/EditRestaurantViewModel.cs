@@ -1,5 +1,4 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace TastyOrders.Web.ViewModels.Restaurant
 {

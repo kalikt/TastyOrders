@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TastyOrders.Web.ViewModels.Restaurant
+﻿namespace TastyOrders.Web.ViewModels.Restaurant
 {
     public class LocationSelectionViewModel
     {

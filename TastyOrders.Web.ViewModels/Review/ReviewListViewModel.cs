@@ -1,7 +1,4 @@
-﻿
-using System.ComponentModel.DataAnnotations;
-
-namespace TastyOrders.Web.ViewModels.Review
+﻿namespace TastyOrders.Web.ViewModels.Review
 {
     public class ReviewListViewModel
     {
