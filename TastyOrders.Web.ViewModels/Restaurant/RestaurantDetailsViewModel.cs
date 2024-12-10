@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TastyOrders.Web.ViewModels.Review;
+﻿using TastyOrders.Web.ViewModels.Review;
 
 namespace TastyOrders.Web.ViewModels.Restaurant
 {
