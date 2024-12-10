@@ -1,5 +1,4 @@
-﻿
-using TastyOrders.Web.ViewModels.Review;
+﻿using TastyOrders.Web.ViewModels.Review;
 
 namespace TastyOrders.Services.Data.Interfaces
 {

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TastyOrders.Web.ViewModels.Cart;
+﻿using TastyOrders.Web.ViewModels.Cart;
 
 namespace TastyOrders.Services.Data.Interfaces
 {
