@@ -4,8 +4,12 @@
 @{
     ViewData["Title"] = Model.Name;
 }
+
 <link rel="stylesheet" href="~/css/reviewDeatils.css" asp-append-version="true" />
 <div class="container my-5">
+    <a asp-action="Index" asp-controller="Restaurant" asp-route-location="@Model.Location" class="btn btn-outline-secondary">
+        &larr; Back
+    </a>
     <div class="row align-items-center">
         <div class="col-md-8">
             <h1 class="text-primary fw-bold">@Model.Name</h1>
