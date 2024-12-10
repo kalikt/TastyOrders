@@ -1,4 +1,3 @@
-
 namespace TastyOrders.Common
 {
     public static class ApplicationConstants

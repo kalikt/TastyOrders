@@ -1,5 +1,4 @@
-﻿
-namespace TastyOrders.Common
+﻿namespace TastyOrders.Common
 {
     public static class EntityValidationMessages
     {
